@@ -7,17 +7,7 @@
 
 #include "guiCommon.h"
 
-gui_Screen::gui_Screen(void * parent, uint8_t index)
-{
-	constructor(parent, index);
-}
-
-gui_Screen::~gui_Screen()
-{
-
-}
-
-void gui_Screen::constructor(void * paren, uint8_t index)
+gui_Screen::gui_Screen(void * paren, uint8_t index)
 {
 	ItemCount = 0;
 	LabelCount = 0;
@@ -29,6 +19,11 @@ void gui_Screen::constructor(void * paren, uint8_t index)
 	SetBackgroundColor(0);
 	SetTextColor(0xffff);
 	parent = paren;
+}
+
+gui_Screen::~gui_Screen()
+{
+
 }
 
 void gui_Screen::printScreen()
@@ -55,7 +50,7 @@ gui_Label * gui_Screen::AddLabels(gui_Label * labels, uint8_t count, bool lock)
 	{
 		LabelField[i].SetParentScreen(this);
 	}
-	LabelField = (gui_Label *)pico.Write(labels, count * sizeof(gui_Label));
+	LabelField = (gui_Label *) pico.Write(labels, count * sizeof(gui_Label));
 	return LabelField;
 }
 
@@ -69,7 +64,7 @@ gui_Item * gui_Screen::AddItems(gui_Item * items, uint8_t count, bool lock)
 		ItemField[i].SetIndex(i);
 		ItemField[i].SetParentScreen(this);
 	}
-	ItemField= (gui_Item*)pico.Write(items, count * sizeof(gui_Item));
+	ItemField = (gui_Item*) pico.Write(items, count * sizeof(gui_Item));
 	return ItemField;
 }
 
@@ -106,12 +101,11 @@ bool gui_Screen::IsActive()
 		return false;
 }
 
-void gui_Screen::SetActive (void)
+void gui_Screen::SetActive(void)
 {
-	gui_GuiBase * gui = (gui_GuiBase * )parent;
+	gui_GuiBase * gui = (gui_GuiBase *) parent;
 	gui->SetActiveScreenIndex(ScreenIndex);
 }
-
 
 #ifdef DYNAMIC_ALLOC
 gui_Item * gui_Screen::MakeItem()

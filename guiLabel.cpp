@@ -9,7 +9,7 @@
 
 gui_Label::gui_Label()
 {
-	//constructor();
+
 
 }
 

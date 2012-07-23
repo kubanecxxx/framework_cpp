@@ -22,9 +22,6 @@ public:
 	gui_Item(void * par, uint8_t idx);
 	~gui_Item();
 	void printItem(void);
-	void constructor();
-	void constructor(void * par, uint8_t idx);
-
 	void operator+=(uint16_t data);
 	void operator-=(uint16_t data);
 	void operator++(void);

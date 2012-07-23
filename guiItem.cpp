@@ -12,27 +12,12 @@ void gui_default_conversion(char* data, int16_t value);
 
 gui_Item::gui_Item(void * par, uint8_t idx)
 {
-	constructor(par, idx);
-}
-
-gui_Item::gui_Item()
-{
-	constructor();
-}
-
-gui_Item::~gui_Item()
-{
-
-}
-
-void gui_Item::constructor(void * par, uint8_t idx)
-{
-	constructor();
+	gui_Item();
 	Index = idx;
 	PrimaryCoor.SetScreen(par);
 }
 
-void gui_Item::constructor()
+gui_Item::gui_Item()
 {
 	BackgroundColorActive = 0xf;
 	BackgroundColorClicked = 0x8000;
@@ -51,6 +36,11 @@ void gui_Item::constructor()
 	NotClicked[BUTTON_UP] = gui_EventNotClickedUp;
 	NotClicked[BUTTON_DOWN] = gui_EventNotClickedDown;
 	NotClicked[BUTTON_ENTER] = gui_EventNotClickedEnter;
+}
+
+gui_Item::~gui_Item()
+{
+
 }
 
 void gui_Item::printItem()

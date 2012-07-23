@@ -9,20 +9,15 @@
 
 gui_GuiBase::gui_GuiBase()
 {
-	constructor();
+	ScreenCount = 0;
+	ScreenIndex = 0;
+	ScreenField = 0;
+	low_level_button_init();
 }
 
 gui_GuiBase::~gui_GuiBase()
 {
 
-}
-
-void gui_GuiBase::constructor()
-{
-	ScreenCount = 0;
-	ScreenIndex = 0;
-	ScreenField = 0;
-	low_level_button_init();
 }
 
 void gui_GuiBase::print_gui(void)
@@ -53,8 +48,7 @@ gui_Screen * gui_GuiBase::MakeScreen()
 	static uint8_t cislo = 0;
 	//musiš si alokovat vicerosouřadnic hned po sobě jinak by to nevalilo vzhledem ke kvalitni správě paměti
 	gui_Screen * temp2;
-	gui_Screen * temp = (gui_Screen *) super_malloc(sizeof(gui_Screen));
-	temp->constructor(this, cislo++);
+	gui_Screen * temp = new gui_Screen(this,cislo);
 
 	if (ScreenField == 0)
 	{

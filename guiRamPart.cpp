@@ -9,16 +9,6 @@
 
 gui_RamPart::gui_RamPart()
 {
-	constructor();
-}
-
-gui_RamPart::~gui_RamPart()
-{
-
-}
-
-void gui_RamPart::constructor()
-{
 	Value = 0;
 	bitField.b.DefaultBackgroundColor = true;
 	bitField.b.DefaultTextColor = true;
@@ -28,3 +18,7 @@ void gui_RamPart::constructor()
 	bitField.b.ValueRounding = true;
 }
 
+gui_RamPart::~gui_RamPart()
+{
+
+}

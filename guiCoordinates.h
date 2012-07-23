@@ -13,12 +13,11 @@
  * snad to nebude žrat moc mista
  */
 
-class gui_Coordinates
+class gui_Coordinates: public gui_New
 {
 public:
 	gui_Coordinates();
 	~gui_Coordinates();
-	void constructor2(void);
 	void SetX(uint16_t xcoor)
 	{
 		x = xcoor;

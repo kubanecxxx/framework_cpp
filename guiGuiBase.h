@@ -14,18 +14,18 @@
 
 #include "guiCommon.h"
 
-class gui_GuiBase
+class gui_GuiBase : public gui_New
 {
 public:
 	gui_GuiBase();
 	~gui_GuiBase();
-	void constructor();
+
 	void print_gui(void);
-/*	void AddScreens(gui_Screen * screens, uint8_t count)
-	{
-		ScreenField = screens;
-		ScreenCount = count;
-	}*/
+	/*	void AddScreens(gui_Screen * screens, uint8_t count)
+	 {
+	 ScreenField = screens;
+	 ScreenCount = count;
+	 }*/
 	gui_Screen * MakeScreen();
 
 	uint16_t GetSize();

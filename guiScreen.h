@@ -14,13 +14,13 @@
  * @todo sem naházet pointery na itemy nebo labely ktery se maji vyjet
  */
 
-class gui_Screen
+class gui_Screen: public gui_New
 {
 public:
 	gui_Screen(void * parent,uint8_t index);
 	~gui_Screen();
 	void printScreen(void);
-	void constructor(void * parent,uint8_t index);
+
 #ifdef DYNAMIC_ALLOC
 	gui_Item * MakeItem();
 	gui_Label * MakeLabel();

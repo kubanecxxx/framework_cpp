@@ -10,13 +10,11 @@
 
 #include "guiCommon.h"
 
-class gui_LabelBase
+class gui_LabelBase: public gui_New
 {
 public:
-	void constructor2(void);
-	gui_LabelBase(void * par);
-	void constructor2(void * par);
-	gui_LabelBase();
+
+	gui_LabelBase(void * par = 0);
 	~gui_LabelBase();
 	void print(void);
 	void AddSecondaryCoor(uint16_t x, uint16_t y, void * screen);

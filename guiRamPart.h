@@ -8,12 +8,11 @@
 #ifndef GUIRAMPART_H_
 #define GUIRAMPART_H_
 
-class gui_RamPart
+class gui_RamPart: public gui_New
 {
 public:
 	gui_RamPart();
 	~gui_RamPart();
-	void constructor(void); //fill with default values
 
 	int16_t Value;
 
@@ -31,7 +30,6 @@ public:
 		uint8_t w;
 	} bitField;
 private:
-
 };
 
 #endif /* GUIRAMPART_H_ */

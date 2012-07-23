@@ -9,16 +9,6 @@
 
 gui_Coordinates::gui_Coordinates()
 {
-	constructor2();
-}
-
-gui_Coordinates::~gui_Coordinates()
-{
-
-}
-
-void gui_Coordinates::constructor2()
-{
 	SetX(10);
 	SetY(20);
 	this->SetScreen(0);
@@ -26,3 +16,9 @@ void gui_Coordinates::constructor2()
 	this->SetShownText(true);
 	this->SetShownValue(true);
 }
+
+gui_Coordinates::~gui_Coordinates()
+{
+
+}
+
