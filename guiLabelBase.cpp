@@ -8,7 +8,7 @@
 #include <string.h>
 #include "guiCommon.h"
 
-gui_LabelBase::gui_LabelBase(void * par)
+gui_LabelBase::gui_LabelBase(gui_Screen * par)
 {
 	gui_LabelBase();
 	PrimaryCoor.SetScreen(par);
@@ -33,7 +33,7 @@ void gui_LabelBase::print(void)
 
 }
 
-void gui_LabelBase::AddSecondaryCoor(uint16_t x, uint16_t y, void * screen)
+void gui_LabelBase::AddSecondaryCoor(uint16_t x, uint16_t y, gui_Screen * screen)
 {
 	//musiš si alokovat vicerosouřadnic hned po sobě jinak by to nevalilo vzhledem ke kvalitni správě paměti
 	gui_Coordinates * temp2;

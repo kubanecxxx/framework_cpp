@@ -10,14 +10,16 @@
 
 #include "guiCommon.h"
 
+class gui_Screen;
+
 class gui_LabelBase: public gui_New
 {
 public:
 
-	gui_LabelBase(void * par = 0);
+	gui_LabelBase(gui_Screen * par = 0);
 	~gui_LabelBase();
 	void print(void);
-	void AddSecondaryCoor(uint16_t x, uint16_t y, void * screen);
+	void AddSecondaryCoor(uint16_t x, uint16_t y, gui_Screen * screen);
 
 	int16_t * GetValuePointer()
 	{
@@ -29,11 +31,11 @@ public:
 		return &(ramPart->Value);
 	}
 
-	void SetParentScreen(void * par)
+	void SetParentScreen(gui_Screen * par)
 	{
 		PrimaryCoor.SetScreen(par);
 	}
-	void * GetParentScreen(void)
+	gui_Screen * GetParentScreen(void)
 	{
 		return PrimaryCoor.GetScreen();
 	}

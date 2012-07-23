@@ -14,10 +14,12 @@
  * @todo sem naházet pointery na itemy nebo labely ktery se maji vyjet
  */
 
+class gui_GuiBase;
+
 class gui_Screen: public gui_New
 {
 public:
-	gui_Screen(void * parent,uint8_t index);
+	gui_Screen(gui_GuiBase * parent,uint8_t index);
 	~gui_Screen();
 	void printScreen(void);
 
@@ -70,7 +72,7 @@ private:
 	uint8_t LabelCount;
 	uint8_t ItemCount;
 	gui_Label * LabelField;
-	void * parent;
+	gui_GuiBase * parent;
 	/*
 	 * sem se pošle sada pole pointerů na jednotlivy item aby se to nemuselo
 	 * alokovat dynamicky tak si to každé alokuje staticky ještě předtim než

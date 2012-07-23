@@ -10,7 +10,7 @@
 
 void gui_default_conversion(char* data, int16_t value);
 
-gui_Item::gui_Item(void * par, uint8_t idx)
+gui_Item::gui_Item(gui_Screen * par, uint8_t idx)
 {
 	gui_Item();
 	Index = idx;
@@ -45,7 +45,7 @@ gui_Item::~gui_Item()
 
 void gui_Item::printItem()
 {
-	gui_Screen * screen = (gui_Screen *) this->GetParentScreen();
+	gui_Screen * screen = GetParentScreen();
 	uint16_t tcolor = this->GetTextColor();
 	uint16_t bcolor = this->GetBackGroundColor();
 	uint16_t val_tcolor = TextColor;

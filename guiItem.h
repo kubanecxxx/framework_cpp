@@ -15,11 +15,13 @@ typedef gui_ButtonCallbackTypedef gui_ButtonCallbackArrayTypedef[BUTTON_COUNT];
 
 typedef void (*gui_ConverstionValueToText)(char *, int16_t);
 
+class gui_Screen;
+
 class gui_Item: public gui_LabelBase
 {
 public:
 	gui_Item();
-	gui_Item(void * par, uint8_t idx);
+	gui_Item(gui_Screen * par, uint8_t idx);
 	~gui_Item();
 	void printItem(void);
 	void operator+=(uint16_t data);

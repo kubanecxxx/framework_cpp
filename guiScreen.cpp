@@ -7,7 +7,7 @@
 
 #include "guiCommon.h"
 
-gui_Screen::gui_Screen(void * paren, uint8_t index)
+gui_Screen::gui_Screen(gui_GuiBase * paren, uint8_t index)
 {
 	ItemCount = 0;
 	LabelCount = 0;

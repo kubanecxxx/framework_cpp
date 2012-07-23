@@ -13,6 +13,8 @@
  * snad to nebude žrat moc mista
  */
 
+class gui_Screen;
+
 class gui_Coordinates: public gui_New
 {
 public:
@@ -34,11 +36,11 @@ public:
 	{
 		return y;
 	}
-	void SetScreen(void * screen)
+	void SetScreen(gui_Screen * screen)
 	{
 		Parent = screen;
 	}
-	void * GetScreen(void)
+	gui_Screen * GetScreen(void)
 	{
 		return Parent;
 	}
@@ -69,7 +71,7 @@ public:
 private:
 	uint16_t x;
 	uint16_t y;
-	void * Parent;
+	gui_Screen * Parent;
 
 	union
 	{

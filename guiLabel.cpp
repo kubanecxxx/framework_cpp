@@ -20,7 +20,7 @@ gui_Label::~gui_Label()
 
 void gui_Label::printLabel()
 {
-	gui_Screen * screen = (gui_Screen *) this->GetParentScreen();
+	gui_Screen * screen = GetParentScreen();
 	uint16_t tcolor = this->GetTextColor();
 	uint16_t bcolor = this->GetBackGroundColor();
 
