@@ -10,7 +10,6 @@
 
 gui_LabelBase::gui_LabelBase(gui_Screen * par)
 {
-	gui_LabelBase();
 	PrimaryCoor.SetScreen(par);
 
 	SetText("je");
