@@ -8,7 +8,7 @@
 #ifndef _GUI_COMMON_H_
 #define _GUI_COMMON_H_
 
-#include <new>	//because of size_t in overriding operator new
+#include "inttypes.h"
 #include "guiNew.h"
 #include "port/framework_port.h"
 #include "guiCoordinates.h"

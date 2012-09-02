@@ -7,6 +7,9 @@
 
 #include "guiFlashWrite.h"
 
+namespace GuiFramework
+{
+
 uint32_t gui_FlashWrite::LastAddress = 0;
 uint32_t gui_FlashWrite::EndAddress = 0;
 
@@ -26,6 +29,7 @@ void * gui_FlashWrite::Write(void * datas, uint32_t size)
 
 void * gui_FlashWrite::Write(uint32_t Address, void * datas, uint32_t size)
 {
+#if 0
 	uint32_t * data = (uint32_t *) datas;
 	uint32_t temp = Address;
 
@@ -50,10 +54,12 @@ void * gui_FlashWrite::Write(uint32_t Address, void * datas, uint32_t size)
 	FLASH_Lock();
 
 	return (void *)temp;
+#endif
 }
 
 void gui_FlashWrite::Erase(uint32_t start, uint32_t stop)
 {
+#if 0
 	FLASH_Unlock();
 	FLASH_ClearFlag(
 			FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR
@@ -80,10 +86,12 @@ void gui_FlashWrite::Erase(uint32_t start, uint32_t stop)
 	LastAddress = start;
 	EndAddress = stop;
 	FLASH_Lock();
+#endif
 }
 
 uint32_t gui_FlashWrite::GetSector(uint32_t Address)
 {
+#if 0
 	uint32_t sector = 0;
 
 	if ((Address < ADDR_FLASH_SECTOR_1) && (Address >= ADDR_FLASH_SECTOR_0))
@@ -146,4 +154,7 @@ uint32_t gui_FlashWrite::GetSector(uint32_t Address)
 	}
 
 	return sector;
+#endif
+}
+
 }

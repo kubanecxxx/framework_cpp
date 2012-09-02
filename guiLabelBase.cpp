@@ -8,6 +8,9 @@
 #include <string.h>
 #include "guiCommon.h"
 
+namespace GuiFramework
+{
+
 gui_LabelBase::gui_LabelBase(gui_Screen * par)
 {
 	PrimaryCoor.SetScreen(par);
@@ -62,4 +65,5 @@ void gui_LabelBase::AddSecondaryCoor(uint16_t x, uint16_t y, gui_Screen * screen
 void gui_LabelBase::SetText(const char * text)
 {
 	strcpy(Text, text);
+}
 }

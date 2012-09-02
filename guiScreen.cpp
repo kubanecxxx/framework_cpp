@@ -6,7 +6,8 @@
  */
 
 #include "guiCommon.h"
-
+namespace GuiFramework
+{
 gui_Screen::gui_Screen(gui_GuiBase * paren, uint8_t index)
 {
 	ItemCount = 0;
@@ -158,4 +159,7 @@ gui_Label * gui_Screen::MakeLabel()
 	LabelCount++;
 	return temp;
 }
+
 #endif
+
+}

@@ -8,6 +8,9 @@
 #include <string.h>
 #include "guiCommon.h"
 
+namespace GuiFramework
+{
+
 void gui_default_conversion(char* data, int16_t value);
 
 gui_Item::gui_Item(gui_Screen * par, uint8_t idx)
@@ -325,4 +328,6 @@ void gui_Item::Click(void)
 {
 	ramPart->bitField.b.IsClicked ^= 1;
 	printItem();
+}
+
 }

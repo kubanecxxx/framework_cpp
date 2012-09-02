@@ -15,8 +15,9 @@ typedef gui_ButtonCallbackTypedef gui_ButtonCallbackArrayTypedef[BUTTON_COUNT];
 
 typedef void (*gui_ConverstionValueToText)(char *, int16_t);
 
+namespace GuiFramework
+{
 class gui_Screen;
-
 class gui_Item: public gui_LabelBase
 {
 public:
@@ -120,5 +121,5 @@ private:
 	gui_ButtonCallbackArrayTypedef Clicked;
 	gui_ButtonCallbackArrayTypedef NotClicked;
 };
-
+}
 #endif /* GUIITEM_H_ */

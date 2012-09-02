@@ -8,6 +8,10 @@
 #ifndef GUIRAMPART_H_
 #define GUIRAMPART_H_
 
+namespace GuiFramework
+{
+
+
 class gui_RamPart: public gui_New
 {
 public:
@@ -31,5 +35,5 @@ public:
 	} bitField;
 private:
 };
-
+}
 #endif /* GUIRAMPART_H_ */

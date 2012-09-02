@@ -14,8 +14,9 @@
  * @todo sem naházet pointery na itemy nebo labely ktery se maji vyjet
  */
 
+namespace GuiFramework
+{
 class gui_GuiBase;
-
 class gui_Screen: public gui_New
 {
 public:
@@ -82,5 +83,5 @@ private:
 	 */
 	gui_Item * ItemField;
 };
-
+}
 #endif /* GUISCREEN_H_ */

@@ -10,6 +10,9 @@
 
 #include "guiCommon.h"
 
+namespace GuiFramework
+{
+
 void gui_EventNotClickedDown(void * data);
 void gui_EventNotClickedUp(void * data);
 void gui_EventNotClickedEnter(void * data);
@@ -17,5 +20,6 @@ void gui_EventClickedDown(void * data);
 void gui_EventClickedUp(void * data);
 void gui_EventClickedEnter(void * data);
 
+}
 
 #endif /* GUI_BUTTONCALLBACKS_H_ */

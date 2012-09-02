@@ -1,5 +1,8 @@
 #include "guiCommon.h"
 
+namespace GuiFramework
+{
+
 void gui_EventNotClickedDown(void * data)
 {
 	gui_Item * item = (gui_Item *) data;
@@ -36,5 +39,5 @@ void gui_EventClickedEnter(void * data)
 
 	item->Click();
 }
-
+}
 //nebudu 

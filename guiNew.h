@@ -8,12 +8,17 @@
 #ifndef GUINEW_H_
 #define GUINEW_H_
 
-#include <new>
+#include <new>	// size_t
+
+namespace GuiFramework
+{
+
 
 class gui_New
 {
 public:
 	static void * operator new (size_t size);
+	static void operator delete(void * data);
 };
-
+}
 #endif /* GUINEW_H_ */

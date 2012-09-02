@@ -6,6 +6,8 @@
  */
 
 #include "guiCommon.h"
+namespace GuiFramework
+{
 
 gui_Label::gui_Label()
 {
@@ -79,4 +81,5 @@ uint16_t gui_Label::GetSize()
 	temp += sizeof(gui_Coordinates) * CoordinatesCount;
 
 	return temp;
+}
 }

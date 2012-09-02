@@ -5,7 +5,10 @@
  *      Author: kubanec
  */
 
+#include "ch.h"
 #include "guiCommon.h"
+namespace GuiFramework
+{
 
 gui_GuiBase::gui_GuiBase()
 {
@@ -13,6 +16,8 @@ gui_GuiBase::gui_GuiBase()
 	ScreenIndex = 0;
 	ScreenField = 0;
 	low_level_button_init();
+
+
 }
 
 gui_GuiBase::~gui_GuiBase()
@@ -83,4 +88,5 @@ bool gui_GuiBase::ButtonScan()
 		item->Event(input, gui_Item::NOTCLICKED);
 
 	return true;
+}
 }

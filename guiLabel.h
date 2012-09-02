@@ -13,6 +13,8 @@
 /*
  * @todo hodit ve kterym screenu to je
  */
+namespace GuiFramework
+{
 
 class gui_Label : public gui_LabelBase
 {
@@ -28,5 +30,5 @@ public:
 private:
 
 };
-
+}
 #endif /* GUILABEL_H_ */

@@ -10,6 +10,8 @@
 
 #include "guiCommon.h"
 
+namespace GuiFramework
+{
 class gui_Screen;
 
 class gui_LabelBase: public gui_New
@@ -209,5 +211,5 @@ protected:
 	gui_Coordinates * CoordinatesSys;
 	uint8_t CoordinatesCount; /*!< number of secondary coordinates, enable show secondary items*/
 };
-
+}
 #endif /* GUILABELBASE_H_ */

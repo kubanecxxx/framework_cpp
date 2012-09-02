@@ -13,8 +13,10 @@
  * snad to nebude žrat moc mista
  */
 
-class gui_Screen;
 
+namespace GuiFramework
+{
+class gui_Screen;
 class gui_Coordinates: public gui_New
 {
 public:
@@ -84,5 +86,5 @@ private:
 		uint8_t w;
 	} bitField;
 };
-
+}
 #endif /* GUICOORDINATES_H_ */

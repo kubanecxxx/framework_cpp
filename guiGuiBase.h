@@ -8,11 +8,15 @@
 #ifndef GUIGUIBASE_H_
 #define GUIGUIBASE_H_
 
+
+
 /**
  * třídu si jenom někdo zdědí aby mohl použivat print gui
  */
 
 #include "guiCommon.h"
+namespace GuiFramework
+{
 
 class gui_GuiBase : public gui_New
 {
@@ -44,5 +48,5 @@ private:
 	uint8_t ScreenCount;
 	gui_Screen * ScreenField;
 };
-
+}
 #endif /* GUIGUIBASE_H_ */

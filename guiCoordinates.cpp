@@ -7,6 +7,9 @@
 
 #include "guiCommon.h"
 
+namespace GuiFramework
+{
+
 gui_Coordinates::gui_Coordinates()
 {
 	SetX(10);
@@ -22,3 +25,4 @@ gui_Coordinates::~gui_Coordinates()
 
 }
 
+}

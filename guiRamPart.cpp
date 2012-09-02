@@ -7,6 +7,10 @@
 
 #include "guiCommon.h"
 
+namespace GuiFramework
+{
+
+
 gui_RamPart::gui_RamPart()
 {
 	Value = 0;
@@ -21,4 +25,5 @@ gui_RamPart::gui_RamPart()
 gui_RamPart::~gui_RamPart()
 {
 
+}
 }
