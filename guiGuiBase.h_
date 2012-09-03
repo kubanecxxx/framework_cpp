@@ -8,8 +8,6 @@
 #ifndef GUIGUIBASE_H_
 #define GUIGUIBASE_H_
 
-
-
 /**
  * třídu si jenom někdo zdědí aby mohl použivat print gui
  */
@@ -18,7 +16,7 @@
 namespace GuiFramework
 {
 
-class gui_GuiBase : public gui_New
+class gui_GuiBase: public gui_New
 {
 public:
 	gui_GuiBase();
@@ -30,7 +28,11 @@ public:
 	 ScreenField = screens;
 	 ScreenCount = count;
 	 }*/
-	gui_Screen * MakeScreen();
+	gui_Screen * MakeScreenHeap();
+	gui_Screen * RegisterScreen(gui_Screen * screen)
+	{
+		return Register<gui_Screen>(screen, ScreenCount, ScreenField);
+	}
 
 	uint16_t GetSize();
 	bool ButtonScan();
@@ -47,6 +49,7 @@ private:
 	uint8_t ScreenIndex;
 	uint8_t ScreenCount;
 	gui_Screen * ScreenField;
+
 };
 }
 #endif /* GUIGUIBASE_H_ */

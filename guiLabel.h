@@ -16,7 +16,7 @@
 namespace GuiFramework
 {
 
-class gui_Label : public gui_LabelBase
+class gui_Label : public gui_LabelBase, public guiDoubleLinkedListClass<gui_Label>
 {
 public:
 	/**

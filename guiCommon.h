@@ -9,6 +9,7 @@
 #define _GUI_COMMON_H_
 
 #include "inttypes.h"
+#include "guiDoubleLinkedListClass.h"
 #include "guiNew.h"
 #include "port/framework_port.h"
 #include "guiCoordinates.h"
@@ -17,7 +18,7 @@
 #include "guiLabel.h"
 #include "guiItem.h"
 #include "guiScreen.h"
-#include "guiGuiBase.h"
+//#include "guiGuiBase.h"
 #include "gui_buttonCallbacks.h"
 #include "guiFlashWrite.h"
 

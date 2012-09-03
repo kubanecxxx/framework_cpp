@@ -15,6 +15,9 @@ gui_LabelBase::gui_LabelBase(gui_Screen * par)
 {
 	PrimaryCoor.SetScreen(par);
 
+	CoordinatesSys = NULL;
+	CoordinatesCount = 0;
+
 	SetText("je");
 	SetBackgroundColor(0);
 	SetTextColor(0xffff);
@@ -26,11 +29,6 @@ gui_LabelBase::gui_LabelBase(gui_Screen * par)
 }
 
 gui_LabelBase::~gui_LabelBase()
-{
-
-}
-
-void gui_LabelBase::print(void)
 {
 
 }

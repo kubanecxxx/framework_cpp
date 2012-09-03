@@ -20,7 +20,6 @@ public:
 
 	gui_LabelBase(gui_Screen * par = 0);
 	~gui_LabelBase();
-	void print(void);
 	void AddSecondaryCoor(uint16_t x, uint16_t y, gui_Screen * screen);
 
 	int16_t * GetValuePointer()

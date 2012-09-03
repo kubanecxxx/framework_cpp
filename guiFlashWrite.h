@@ -31,14 +31,16 @@ class gui_FlashWrite
 public:
 	gui_FlashWrite();
 	~gui_FlashWrite();
-	uint32_t GetSector(uint32_t Address);
-	void Erase(uint32_t start, uint32_t stop);
-	void * Write(uint32_t start_address, void * data, uint32_t size);
-	void * Write(void * datas, uint32_t size);
+	static uint32_t GetSector(uint32_t Address);
+	static void Erase(uint32_t start, uint32_t stop);
+	static void * Write(void * datas, uint32_t size);
 
 private:
+	static void * Write(uint32_t start_address, void * data, uint32_t size);
 	static uint32_t LastAddress;
 	static uint32_t EndAddress;
+
+	static const uint32_t sectors[12];
 };
 }
 #endif /* GUIFLASHWRITE_H_ */

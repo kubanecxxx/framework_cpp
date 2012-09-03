@@ -18,7 +18,7 @@ typedef void (*gui_ConverstionValueToText)(char *, int16_t);
 namespace GuiFramework
 {
 class gui_Screen;
-class gui_Item: public gui_LabelBase
+class gui_Item: public gui_LabelBase , public guiDoubleLinkedListClass<gui_Item>
 {
 public:
 	gui_Item();

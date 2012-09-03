@@ -8,39 +8,67 @@
 #include "guiCommon.h"
 namespace GuiFramework
 {
-gui_Screen::gui_Screen(gui_GuiBase * paren, uint8_t index)
+
+uint8_t gui_Screen::IndexActive = 0;
+uint8_t gui_Screen::Count = 0;
+
+gui_Screen::gui_Screen()
 {
 	ItemCount = 0;
 	LabelCount = 0;
-	LabelField = 0;
-	ItemField = 0;
-	ScreenIndex = index;
+	FirstItem = NULL;
+	FirstLabel = NULL;
+	ScreenIndex = Count++;
 	ItemIndex = 0;
 
 	SetBackgroundColor(0);
 	SetTextColor(0xffff);
-	parent = paren;
-}
-
-gui_Screen::~gui_Screen()
-{
-
 }
 
 void gui_Screen::printScreen()
 {
 	low_level_FillRGB(BackgroundColor);
+	SetActive();
 
+	gui_Item * temp = FirstItem;
 	for (int i = 0; i < ItemCount; i++)
-		ItemField[i].printItem();
-
-	for (int i = 0; i < LabelCount; i++)
 	{
-		LabelField[i].printLabel();
+		temp->printItem();
+		temp = temp->GetNext();
 	}
 
+	gui_Label * lab = FirstLabel;
+	for (int i = 0; i < LabelCount; i++)
+	{
+		lab->printLabel();
+		lab = lab->GetNext();
+	}
 }
 
+uint16_t gui_Screen::GetSize()
+{
+	uint16_t temp = sizeof(gui_Screen);
+	gui_Item * item = FirstItem;
+
+	for (int i = 0 ; i < ItemCount; i++)
+	{
+		temp += item->GetSize();
+		item = item->GetNext();
+	}
+
+	gui_Label * label = FirstLabel;
+	for (int i = 0 ; i < LabelCount ; i++)
+	{
+		temp += label->GetSize();
+		label = label->GetNext();
+	}
+	return temp;
+}
+/**
+ * @todo
+ * vytvořit funkce na newlabel a newitem from heap, i s uvolňováním
+ */
+#if 0
 gui_Label * gui_Screen::AddLabels(gui_Label * labels, uint8_t count, bool lock)
 {
 	gui_FlashWrite pico;
@@ -68,98 +96,6 @@ gui_Item * gui_Screen::AddItems(gui_Item * items, uint8_t count, bool lock)
 	ItemField = (gui_Item*) pico.Write(items, count * sizeof(gui_Item));
 	return ItemField;
 }
-
-uint16_t gui_Screen::GetSize()
-{
-	uint16_t temp;
-
-	temp = sizeof(gui_Screen);
-	for (int i = 0; i < ItemCount; i++)
-	{
-		temp += ItemField[i].GetSize();
-	}
-	for (int i = 0; i < LabelCount; i++)
-		temp += LabelField[i].GetSize();
-
-	return temp;
-}
-
-gui_Item * gui_Screen::GetActiveItem()
-{
-	for (int i = 0; i < ItemCount; i++)
-		if (ItemField[i].GetActive())
-			return (&ItemField[i]);
-
-	return 0;
-}
-
-bool gui_Screen::IsActive()
-{
-	gui_GuiBase * fotr = (gui_GuiBase *) parent;
-	if (ScreenIndex == fotr->GetActiveScreenIndex())
-		return true;
-	else
-		return false;
-}
-
-void gui_Screen::SetActive(void)
-{
-	gui_GuiBase * gui = (gui_GuiBase *) parent;
-	gui->SetActiveScreenIndex(ScreenIndex);
-}
-
-#ifdef DYNAMIC_ALLOC
-gui_Item * gui_Screen::MakeItem()
-{
-	//musiš si alokovat vicerosouřadnic hned po sobě jinak by to nevalilo vzhledem ke kvalitni správě paměti
-	gui_Item* temp2;
-	gui_Item* temp = (gui_Item*) super_malloc(sizeof(gui_Item));
-	temp->constructor2();
-	temp->constructor(this,ItemCount);
-
-	if (ItemField== 0)
-	{
-		ItemField = temp;
-		ItemCount++;
-		return temp;
-	}
-
-	temp2 = ItemField;
-	ItemField += ItemCount;
-	if (ItemField != temp)
-	while (1)
-	;
-	ItemField = temp;
-	ItemField = temp2;
-	ItemCount++;
-	return temp;
-}
-
-gui_Label * gui_Screen::MakeLabel()
-{
-	//musiš si alokovat vicerosouřadnic hned po sobě jinak by to nevalilo vzhledem ke kvalitni správě paměti
-	gui_Label* temp2;
-	gui_Label* temp = (gui_Label*) super_malloc(sizeof(gui_Label));
-	temp->constructor2(this);
-
-	if (LabelField== 0)
-	{
-		LabelField = temp;
-		LabelCount++;
-		return temp;
-	}
-
-	temp2 = LabelField;
-	LabelField += LabelCount;
-	if (LabelField != temp)
-	while (1)
-	;
-	LabelField = temp;
-	LabelField = temp2;
-	LabelCount++;
-	return temp;
-}
-
 #endif
 
 }
