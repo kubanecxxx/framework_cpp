@@ -8,8 +8,6 @@
 #ifndef GUILABEL_H_
 #define GUILABEL_H_
 
-#include "guiCommon.h"
-
 /*
  * @todo hodit ve kterym screenu to je
  */

@@ -5,7 +5,6 @@
  *      Author: kubanec
  */
 
-#include <string.h>
 #include "guiCommon.h"
 
 namespace GuiFramework

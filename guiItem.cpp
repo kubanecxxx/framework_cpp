@@ -5,7 +5,6 @@
  *      Author: kubanec
  */
 
-#include <string.h>
 #include "guiCommon.h"
 
 namespace GuiFramework
@@ -56,6 +55,8 @@ void gui_Item::printItem()
 	uint16_t val_temp;
 	uint16_t t_temp;
 	char buffer[16];
+
+
 
 	if (!screen->IsActive())
 		return;

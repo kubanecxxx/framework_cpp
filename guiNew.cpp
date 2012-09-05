@@ -5,8 +5,8 @@
  *
  */
 
-#include "guiNew.h"
-#include "port/framework_port.h"
+#include "guiCommon.h"
+
 namespace GuiFramework
 {
 
@@ -18,6 +18,6 @@ void * gui_New::operator new(size_t size)
 
 void gui_New::operator delete(void * data)
 {
-
+	gui_freeMemory(data);
 }
 }

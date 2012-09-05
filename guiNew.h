@@ -8,8 +8,6 @@
 #ifndef GUINEW_H_
 #define GUINEW_H_
 
-#include <new>	// size_t
-
 namespace GuiFramework
 {
 

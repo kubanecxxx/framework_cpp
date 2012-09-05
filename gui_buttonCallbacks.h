@@ -8,8 +8,6 @@
 #ifndef GUI_BUTTONCALLBACKS_H_
 #define GUI_BUTTONCALLBACKS_H_
 
-#include "guiCommon.h"
-
 namespace GuiFramework
 {
 

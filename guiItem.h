@@ -8,7 +8,6 @@
 #ifndef GUIITEM_H_
 #define GUIITEM_H_
 
-#include "guiCommon.h"
 
 typedef void (*gui_ButtonCallbackTypedef)(void *);
 typedef gui_ButtonCallbackTypedef gui_ButtonCallbackArrayTypedef[BUTTON_COUNT];

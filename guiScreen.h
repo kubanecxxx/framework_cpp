@@ -8,8 +8,6 @@
 #ifndef GUISCREEN_H_
 #define GUISCREEN_H_
 
-#include "guiCommon.h"
-
 /*
  * @todo sem naházet pointery na itemy nebo labely ktery se maji vyjet
  */
@@ -23,16 +21,22 @@ public:
 	void printScreen(void);
 	uint16_t GetSize();
 
-	inline gui_Item * Register(gui_Item * item)
+	inline gui_Item * Register(gui_Item * item, bool storeToFlash = false)
 	{
 		item->SetParentScreen(this);
-		return gui_Item::Register(item, ItemCount, FirstItem);
+		if (storeToFlash)
+			item = item->WriteToFlash();
+
+		return item->Register(item, ItemCount, FirstItem);
 	}
 
-	inline gui_Label * Register(gui_Label * label)
+	inline gui_Label * Register(gui_Label * label, bool storeToFlash = false)
 	{
 		label->SetParentScreen(this);
-		return gui_Label::Register(label, LabelCount, FirstLabel);
+		if (storeToFlash)
+			label = label->WriteToFlash();
+
+		return label->Register(label, LabelCount, FirstLabel);
 	}
 
 	inline uint8_t GetItemIndex()
@@ -41,7 +45,7 @@ public:
 	}
 	inline gui_Item * GetActiveItem(void)
 	{
-		return gui_Item::GetFromIndex(FirstItem,ItemIndex,ItemCount);
+		return gui_Item::GetFromIndex(FirstItem, ItemIndex, ItemCount);
 	}
 	inline void SetBackgroundColor(uint16_t color)
 	{

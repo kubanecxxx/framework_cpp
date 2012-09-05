@@ -8,8 +8,6 @@
 #ifndef GUILABELBASE_H_
 #define GUILABELBASE_H_
 
-#include "guiCommon.h"
-
 namespace GuiFramework
 {
 class gui_Screen;

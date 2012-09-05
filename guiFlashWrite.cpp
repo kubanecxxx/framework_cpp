@@ -5,6 +5,7 @@
  *      Author: kubanec
  */
 
+#include "inttypes.h"
 #include "guiFlashWrite.h"
 #include "stm32f4xx_flash.h"
 
@@ -18,21 +19,8 @@ const uint32_t gui_FlashWrite::sectors[12] =
 { ADDR_FLASH_SECTOR_0, ADDR_FLASH_SECTOR_1, ADDR_FLASH_SECTOR_2,
 		ADDR_FLASH_SECTOR_3, ADDR_FLASH_SECTOR_4, ADDR_FLASH_SECTOR_5,
 		ADDR_FLASH_SECTOR_6, ADDR_FLASH_SECTOR_7, ADDR_FLASH_SECTOR_8,
-		ADDR_FLASH_SECTOR_9, ADDR_FLASH_SECTOR_10, ADDR_FLASH_SECTOR_11 , };
+		ADDR_FLASH_SECTOR_9, ADDR_FLASH_SECTOR_10, ADDR_FLASH_SECTOR_11  };
 
-gui_FlashWrite::gui_FlashWrite()
-{
-
-}
-
-gui_FlashWrite::~gui_FlashWrite()
-{
-
-}
-void * gui_FlashWrite::Write(void * datas, uint32_t size)
-{
-	return Write(LastAddress, datas, size);
-}
 
 void * gui_FlashWrite::Write(uint32_t Address, void * datas, uint32_t size)
 {
@@ -95,13 +83,14 @@ void gui_FlashWrite::Erase(uint32_t start, uint32_t stop)
 
 uint32_t gui_FlashWrite::GetSector(uint32_t Address)
 {
-	int i;
+	uint32_t i;
 
 	for (i = 0; i < 12; i++)
 	{
-		if (Address < sectors[i])
+		if (Address > sectors[i])
 			break;
 	}
 
-	return i;
+	return i - 1;
+}
 }

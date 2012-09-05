@@ -8,7 +8,7 @@
 #ifndef GUIFLASHWRITE_H_
 #define GUIFLASHWRITE_H_
 
-#include "guiCommon.h"
+
 
 /* Base address of the Flash sectors */
 #define ADDR_FLASH_SECTOR_0     ((uint32_t)0x08000000) /* Base @ of Sector 0, 16 Kbytes */
@@ -29,11 +29,12 @@ namespace GuiFramework
 class gui_FlashWrite
 {
 public:
-	gui_FlashWrite();
-	~gui_FlashWrite();
 	static uint32_t GetSector(uint32_t Address);
 	static void Erase(uint32_t start, uint32_t stop);
-	static void * Write(void * datas, uint32_t size);
+	static void * Write(void * datas, uint32_t size)
+	{
+		return Write(LastAddress, datas, size);
+	}
 
 private:
 	static void * Write(uint32_t start_address, void * data, uint32_t size);
@@ -41,6 +42,9 @@ private:
 	static uint32_t EndAddress;
 
 	static const uint32_t sectors[12];
+
+	//gui_FlashWrite();
+	//~gui_FlashWrite();
 };
 }
 #endif /* GUIFLASHWRITE_H_ */
