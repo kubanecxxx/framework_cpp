@@ -9,8 +9,8 @@
 namespace GuiFramework
 {
 
-uint8_t gui_Screen::IndexActive = 0;
 uint8_t gui_Screen::Count = 0;
+gui_Screen * gui_Screen::ActiveScreen = NULL;
 
 gui_Screen::gui_Screen()
 {
@@ -18,27 +18,26 @@ gui_Screen::gui_Screen()
 	LabelCount = 0;
 	FirstItem = NULL;
 	FirstLabel = NULL;
-	ScreenIndex = Count++;
+	Count++;
 	ItemIndex = 0;
 
 	SetBackgroundColor(0);
 	SetTextColor(0xffff);
 }
 
-void gui_Screen::printScreen()
+void gui_Screen::printActiveScreen()
 {
-	low_level_FillRGB(BackgroundColor);
-	SetActive();
+	low_level_FillRGB(ActiveScreen->BackgroundColor);
 
-	gui_Item * temp = FirstItem;
-	for (int i = 0; i < ItemCount; i++)
+	gui_Item * temp = ActiveScreen->FirstItem;
+	for (int i = 0; i < ActiveScreen->ItemCount; i++)
 	{
 		temp->printItem();
 		temp = temp->GetNext();
 	}
 
-	gui_Label * lab = FirstLabel;
-	for (int i = 0; i < LabelCount; i++)
+	gui_Label * lab = ActiveScreen->FirstLabel;
+	for (int i = 0; i < ActiveScreen->LabelCount; i++)
 	{
 		lab->printLabel();
 		lab = lab->GetNext();
@@ -50,20 +49,42 @@ uint16_t gui_Screen::GetSize()
 	uint16_t temp = sizeof(gui_Screen);
 	gui_Item * item = FirstItem;
 
-	for (int i = 0 ; i < ItemCount; i++)
+	for (int i = 0; i < ItemCount; i++)
 	{
 		temp += item->GetSize();
 		item = item->GetNext();
 	}
 
 	gui_Label * label = FirstLabel;
-	for (int i = 0 ; i < LabelCount ; i++)
+	for (int i = 0; i < LabelCount; i++)
 	{
 		temp += label->GetSize();
 		label = label->GetNext();
 	}
 	return temp;
 }
+
+bool gui_Screen::ButtonScan()
+{
+	volatile gui_Item::Buttons input =
+			(gui_Item::Buttons) low_level_input_buttons();
+
+	gui_Item * item;
+	item = ActiveScreen->GetActiveItem();
+
+	if (input != gui_Item::BUTTON_DOWN && input != gui_Item::BUTTON_UP
+			&& input != gui_Item::BUTTON_ENTER)
+		return false;
+
+	if (item->GetClicked())
+		item->Event(input, gui_Item::CLICKED);
+	else
+		item->Event(input, gui_Item::NOTCLICKED);
+
+	return true;
+
+}
+
 /**
  * @todo
  * vytvořit funkce na newlabel a newitem from heap, i s uvolňováním
