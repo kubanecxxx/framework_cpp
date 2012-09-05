@@ -16,11 +16,8 @@ uint32_t gui_FlashWrite::LastAddress = 0;
 uint32_t gui_FlashWrite::EndAddress = 0;
 
 const uint32_t gui_FlashWrite::sectors[12] =
-{ ADDR_FLASH_SECTOR_0, ADDR_FLASH_SECTOR_1, ADDR_FLASH_SECTOR_2,
-		ADDR_FLASH_SECTOR_3, ADDR_FLASH_SECTOR_4, ADDR_FLASH_SECTOR_5,
-		ADDR_FLASH_SECTOR_6, ADDR_FLASH_SECTOR_7, ADDR_FLASH_SECTOR_8,
-		ADDR_FLASH_SECTOR_9, ADDR_FLASH_SECTOR_10, ADDR_FLASH_SECTOR_11  };
-
+{ SEC_0, SEC_1, SEC_2, SEC_3, SEC_4, SEC_5, SEC_6, SEC_7, SEC_8, SEC_9, SEC_10,
+		SEC_11 };
 
 void * gui_FlashWrite::Write(uint32_t Address, void * datas, uint32_t size)
 {
@@ -87,10 +84,10 @@ uint32_t gui_FlashWrite::GetSector(uint32_t Address)
 
 	for (i = 0; i < 12; i++)
 	{
-		if (Address > sectors[i])
+		if (Address < sectors[i])
 			break;
 	}
 
-	return i - 1;
+	return i - 1 ;
 }
 }

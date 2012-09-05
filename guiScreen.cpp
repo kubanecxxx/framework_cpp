@@ -18,11 +18,15 @@ gui_Screen::gui_Screen()
 	LabelCount = 0;
 	FirstItem = NULL;
 	FirstLabel = NULL;
-	Count++;
 	ItemIndex = 0;
 
 	SetBackgroundColor(0);
 	SetTextColor(0xffff);
+
+	if (Count == 0)
+		SetActive();
+
+	Count++;
 }
 
 void gui_Screen::printActiveScreen()
