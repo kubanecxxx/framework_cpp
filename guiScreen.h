@@ -29,20 +29,23 @@ public:
 
 	inline gui_Item * Register(gui_Item * item, bool storeToFlash = false)
 	{
+		gui_Item * temp  = item;
 		item->SetParentScreen(this);
+		item->SetIndex(ItemCount);
 		if (storeToFlash)
-			item = item->WriteToFlash();
+			temp = item->WriteToFlash();
 
-		return item->Register(item, ItemCount, FirstItem);
+		return temp->Register(temp, ItemCount, FirstItem);
 	}
 
 	inline gui_Label * Register(gui_Label * label, bool storeToFlash = false)
 	{
+		gui_Label * temp = label;
 		label->SetParentScreen(this);
 		if (storeToFlash)
-			label = label->WriteToFlash();
+			temp = label->WriteToFlash();
 
-		return label->Register(label, LabelCount, FirstLabel);
+		return temp->Register(temp, LabelCount, FirstLabel);
 	}
 
 	inline uint8_t GetItemIndex()

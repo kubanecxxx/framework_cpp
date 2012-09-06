@@ -33,8 +33,8 @@ public:
 		SEC_7 = 0x08060000,
 		SEC_8 = 0x08080000,
 		SEC_9 = 0x080A0000,
-		SEC_10 = 0x0800C000,
-		SEC_11 = 0x0800E000,
+		SEC_10 = 0x080C0000,
+		SEC_11 = 0x080E0000,
 	} ADDR;
 
 private:

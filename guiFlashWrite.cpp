@@ -24,8 +24,12 @@ void * gui_FlashWrite::Write(uint32_t Address, void * datas, uint32_t size)
 	uint32_t * data = (uint32_t *) datas;
 	uint32_t temp = Address;
 
-	FLASH_Unlock();
+	while (size % 4 != 0)
+		size++;
+
 	size /= 4;
+
+	FLASH_Unlock();
 	while (size--)
 	{
 		if (FLASH_ProgramWord(Address, *(data++)) == FLASH_COMPLETE)
@@ -82,12 +86,12 @@ uint32_t gui_FlashWrite::GetSector(uint32_t Address)
 {
 	uint32_t i;
 
-	for (i = 0; i < 12; i++)
+	for (i = 11; i != 0; i--)
 	{
-		if (Address < sectors[i])
+		if (Address >= sectors[i])
 			break;
 	}
 
-	return i - 1 ;
+	return (i  * 8);
 }
 }

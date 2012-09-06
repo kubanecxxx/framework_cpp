@@ -60,10 +60,10 @@ public:
 		{
 			temp = FIRST;
 
-			do
+			for (int i = 1 ; i < Count ; i++)
 			{
 				temp = temp->GetNext();
-			} while (temp->GetNext() != 0);
+			}
 
 			temp->SetNext(item);
 			item->SetPrev(temp);
@@ -89,17 +89,16 @@ public:
 		return temp;
 	}
 
-	T * WriteToFlash(void);
+	virtual T * WriteToFlash(void);
 
 private:
 	guiDoubleLinkedListClasstemp<T> * list;
 };
 
-
-template <class T>
+template<class T>
 T * guiDoubleLinkedListClass<T>::WriteToFlash(void)
 {
-	return (T *)gui_FlashWrite::Write(this, sizeof(T));
+	return (T *) gui_FlashWrite::Write(this, sizeof(T));
 }
 
 } /* namespace GuiFramework */
