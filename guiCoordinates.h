@@ -16,57 +16,55 @@
 
 namespace GuiFramework
 {
+class gui_LabelBase;
 class gui_Screen;
-class gui_Coordinates: public gui_New
+class gui_Coordinates
 {
 public:
 	gui_Coordinates();
 	~gui_Coordinates();
-	void SetX(uint16_t xcoor)
+	inline void SetX(uint16_t xcoor)
 	{
 		x = xcoor;
 	}
-	uint16_t GetX(void)
+	inline uint16_t GetX(void) const
 	{
 		return x;
 	}
-	void SetY(uint16_t ycoor)
+	inline void SetY(uint16_t ycoor)
 	{
 		y = ycoor;
 	}
-	uint16_t GetY(void)
+	inline uint16_t GetY(void) const
 	{
 		return y;
 	}
-	void SetScreen(gui_Screen * screen)
-	{
-		Parent = screen;
-	}
-	gui_Screen * GetScreen(void)
+
+	inline gui_Screen * GetScreen(void)
 	{
 		return Parent;
 	}
-	void SetShown(bool data)
+	inline void SetShown(bool data)
 	{
 		bitField.b.IsShown = data;
 	}
-	void SetShownText(bool data)
+	inline void SetShownText(bool data)
 	{
 		bitField.b.IsShownText = data;
 	}
-	void SetShownValue(bool data)
+	inline void SetShownValue(bool data)
 	{
 		bitField.b.IsShownValue = data;
 	}
-	bool GetShown(void)
+	inline bool GetShown(void) const
 	{
 		return bitField.b.IsShown;
 	}
-	bool GetShownText(void)
+	inline bool GetShownText(void) const
 	{
 		return bitField.b.IsShownText;
 	}
-	bool GetShownValue(void)
+	inline bool GetShownValue(void) const
 	{
 		return bitField.b.IsShownValue;
 	}
@@ -74,6 +72,7 @@ private:
 	uint16_t x;
 	uint16_t y;
 	gui_Screen * Parent;
+	friend class gui_LabelBase;
 
 	union
 	{

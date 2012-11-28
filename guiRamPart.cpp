@@ -10,7 +10,9 @@
 namespace GuiFramework
 {
 
-
+/**
+ * @brief defaulní nastavení všech vlastností
+ */
 gui_RamPart::gui_RamPart()
 {
 	Value = 0;
@@ -20,10 +22,5 @@ gui_RamPart::gui_RamPart()
 	bitField.b.IsClicked = false;
 	bitField.b.IsShown = true;
 	bitField.b.ValueRounding = true;
-}
-
-gui_RamPart::~gui_RamPart()
-{
-
 }
 }

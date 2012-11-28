@@ -36,14 +36,14 @@ void gui_Screen::printActiveScreen()
 	gui_Item * temp = ActiveScreen->FirstItem;
 	for (int i = 0; i < ActiveScreen->ItemCount; i++)
 	{
-		temp->printItem();
+		temp->print();
 		temp = temp->GetNext();
 	}
 
 	gui_Label * lab = ActiveScreen->FirstLabel;
 	for (int i = 0; i < ActiveScreen->LabelCount; i++)
 	{
-		lab->printLabel();
+		lab->print();
 		lab = lab->GetNext();
 	}
 }

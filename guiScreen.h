@@ -14,7 +14,7 @@
 
 namespace GuiFramework
 {
-class gui_Screen: public gui_New
+class gui_Screen
 {
 public:
 	gui_Screen();
@@ -25,11 +25,11 @@ public:
 		printActiveScreen();
 	}
 	uint16_t GetSize();
-	 static bool ButtonScan();
+	static bool ButtonScan();
 
 	inline gui_Item * Register(gui_Item * item, bool storeToFlash = false)
 	{
-		gui_Item * temp  = item;
+		gui_Item * temp = item;
 		item->SetParentScreen(this);
 		item->SetIndex(ItemCount);
 		if (storeToFlash)

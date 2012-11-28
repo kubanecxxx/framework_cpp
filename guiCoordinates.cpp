@@ -14,7 +14,7 @@ gui_Coordinates::gui_Coordinates()
 {
 	SetX(10);
 	SetY(20);
-	this->SetScreen(0);
+	Parent = 0;
 	this->SetShown(true);
 	this->SetShownText(true);
 	this->SetShownValue(true);

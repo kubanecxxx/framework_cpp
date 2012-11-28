@@ -8,19 +8,10 @@
 #include "guiCommon.h"
 namespace GuiFramework
 {
-
-gui_Label::gui_Label()
-{
-
-
-}
-
-gui_Label::~gui_Label()
-{
-
-}
-
-void gui_Label::printLabel()
+/**
+ * @brief vytiskne label pokud je aktivni jeho screen
+ */
+void gui_Label::print()
 {
 	gui_Screen * screen = GetParentScreen();
 	uint16_t tcolor = this->GetTextColor();
@@ -72,7 +63,7 @@ void gui_Label::printLabel()
 	}
 }
 
-uint16_t gui_Label::GetSize()
+uint16_t gui_Label::GetSize() const
 {
 	uint16_t temp;
 

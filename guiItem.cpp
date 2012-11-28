@@ -12,13 +12,6 @@ namespace GuiFramework
 
 void gui_default_conversion(char* data, int16_t value);
 
-gui_Item::gui_Item(gui_Screen * par, uint8_t idx)
-{
-	gui_Item();
-	Index = idx;
-	PrimaryCoor.SetScreen(par);
-}
-
 gui_Item::gui_Item()
 {
 	BackgroundColorActive = 0xf;
@@ -45,7 +38,10 @@ gui_Item::~gui_Item()
 
 }
 
-void gui_Item::printItem()
+/**
+ * @brief vytiskne item pokud je aktuální jeho screen
+ */
+void gui_Item::print()
 {
 	gui_Screen * screen = GetParentScreen();
 	uint16_t tcolor = this->GetTextColor();
@@ -55,8 +51,6 @@ void gui_Item::printItem()
 	uint16_t val_temp;
 	uint16_t t_temp;
 	char buffer[16];
-
-
 
 	if (!screen->IsActive())
 		return;
@@ -195,7 +189,7 @@ bool gui_Item::GetActive()
 		return false;
 }
 
-uint16_t gui_Item::GetSize()
+uint16_t gui_Item::GetSize() const
 {
 	uint16_t temp;
 
@@ -241,6 +235,9 @@ void gui_Item::operator-=(uint16_t data)
 	ramPart->Value -= data;
 }
 
+/**
+ * @odečte jedničku od value, připadně protoči a přetiskne
+ */
 void gui_Item::operator--()
 {
 	if (ramPart->Value + Step <= HighLimit)
@@ -258,9 +255,12 @@ void gui_Item::operator--()
 			ramPart->Value = HighLimit;
 		}
 	}
-	printItem();
+	print();
 }
 
+/**
+ * @brief přičte jedničku hodnotě value, pokud je zapnuty protáčení tak přeskočí na minimum
+ */
 void gui_Item::operator++()
 {
 	if (ramPart->Value - Step >= LowLimit)
@@ -278,9 +278,12 @@ void gui_Item::operator++()
 			ramPart->Value = LowLimit;
 		}
 	}
-	printItem();
+	print();
 }
 
+/**
+ * @najede na další item, přetiskne co je potřeba
+ */
 void gui_Item::NextItem(void)
 {
 	gui_Screen * screen = (gui_Screen *) GetParentScreen();
@@ -299,10 +302,13 @@ void gui_Item::NextItem(void)
 	} while (!screen->GetActiveItem()->IsShownGlobal()
 			|| !screen->GetActiveItem()->GetChoseable());
 
-	printItem();
-	screen->GetActiveItem()->printItem();
+	print();
+	screen->GetActiveItem()->print();
 }
 
+/**
+ * @brief najede na předchozí item, přetiskne co je potřeba
+ */
 void gui_Item::PrevItem(void)
 {
 	gui_Screen * screen = (gui_Screen *) GetParentScreen();
@@ -321,14 +327,14 @@ void gui_Item::PrevItem(void)
 	} while (!screen->GetActiveItem()->IsShownGlobal()
 			|| !screen->GetActiveItem()->GetChoseable());
 
-	printItem();
-	screen->GetActiveItem()->printItem();
+	print();
+	screen->GetActiveItem()->print();
 }
 
 void gui_Item::Click(void)
 {
 	ramPart->bitField.b.IsClicked ^= 1;
-	printItem();
+	print();
 }
 
 }

@@ -10,10 +10,11 @@
 namespace GuiFramework
 {
 
-gui_LabelBase::gui_LabelBase(gui_Screen * par)
+/**
+ * @brief konstruktor nastaví defaultní vlastnosti, alokuje si ramPart
+ */
+gui_LabelBase::gui_LabelBase()
 {
-	PrimaryCoor.SetScreen(par);
-
 	CoordinatesSys = NULL;
 	CoordinatesCount = 0;
 
@@ -21,17 +22,17 @@ gui_LabelBase::gui_LabelBase(gui_Screen * par)
 	SetBackgroundColor(0);
 	SetTextColor(0xffff);
 	SetFontSize(8);
-	SetRamPart(0);
 	SetCoordinates(0, 0);
 
 	ramPart = new gui_RamPart;
 }
 
-gui_LabelBase::~gui_LabelBase()
-{
-
-}
-
+/**
+ * @brief vytvoři sekundární souřadnice
+ *
+ * souřadnice sou vytvořeny na heapě, může být aji jinači screen. widget se bude zobrazovat uplně
+ * stejně akorát jinde nebo v jinym screenu, dokonce se i bude vybirat jako item zároveň
+ */
 void gui_LabelBase::AddSecondaryCoor(uint16_t x, uint16_t y, gui_Screen * screen)
 {
 	//musiš si alokovat vicerosouřadnic hned po sobě jinak by to nevalilo vzhledem ke kvalitni správě paměti
@@ -40,7 +41,7 @@ void gui_LabelBase::AddSecondaryCoor(uint16_t x, uint16_t y, gui_Screen * screen
 
 	temp->SetX(x);
 	temp->SetY(y);
-	temp->SetScreen(screen);
+	temp->Parent = screen;
 
 	if (CoordinatesSys == 0)
 	{
@@ -59,8 +60,12 @@ void gui_LabelBase::AddSecondaryCoor(uint16_t x, uint16_t y, gui_Screen * screen
 	CoordinatesCount++;
 }
 
+/**
+ * @brief naloadovat text
+ * @todo vykašlat se na strcpy a jenom sem střihnout pointer na text co už je ve flašce
+ */
 void gui_LabelBase::SetText(const char * text)
 {
-	strcpy(Text, text);
+	Text = text;
 }
 }

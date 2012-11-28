@@ -3,6 +3,12 @@
 namespace GuiFramework
 {
 
+/**
+ * @brief Defaultní callbacky pro tlačitka od itemů
+ * @defgroup default_callbaks
+ * @{
+ */
+
 void gui_EventNotClickedDown(void * data)
 {
 	gui_Item * item = (gui_Item *) data;
@@ -39,5 +45,10 @@ void gui_EventClickedEnter(void * data)
 
 	item->Click();
 }
+
+/**
+ * @}
+ */
+
 }
 //nebudu 

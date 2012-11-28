@@ -20,10 +20,8 @@ public:
 	/**
 	 * všechno set,get
 	 */
-	gui_Label();
-	~gui_Label();
-	void printLabel(void);
-	uint16_t GetSize();
+	void print(void);
+	uint16_t GetSize() const;
 
 private:
 

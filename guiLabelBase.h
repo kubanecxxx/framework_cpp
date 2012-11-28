@@ -12,199 +12,157 @@ namespace GuiFramework
 {
 class gui_Screen;
 
-class gui_LabelBase: public gui_New
+class gui_LabelBase
 {
+	/**
+	 * @brief nastaví parent screen
+	 */
+	inline void SetParentScreen(gui_Screen * par)
+	{
+		PrimaryCoor.Parent = par;
+	}
 public:
-
-	gui_LabelBase(gui_Screen * par = 0);
-	~gui_LabelBase();
+	gui_LabelBase();
 	void AddSecondaryCoor(uint16_t x, uint16_t y, gui_Screen * screen);
 
-	int16_t * GetValuePointer()
-	{
-		return &(ramPart->Value);
-	}
-
-	const int16_t * GetValueConstPointer()
-	{
-		return &(ramPart->Value);
-	}
-
-	void SetParentScreen(gui_Screen * par)
-	{
-		PrimaryCoor.SetScreen(par);
-	}
-	gui_Screen * GetParentScreen(void)
+	inline gui_Screen * GetParentScreen(void)
 	{
 		return PrimaryCoor.GetScreen();
 	}
 	void SetText(const char * text);
-	const char * GetText(void)
+	inline const char * GetText(void) const
 	{
 		return Text;
 	}
-	void SetBackgroundColor(uint16_t color)
+	inline void SetBackgroundColor(uint16_t color)
 	{
 		BackgroundColor = color;
 	}
-	uint16_t GetBackGroundColor(void)
+	inline uint16_t GetBackGroundColor(void) const
 	{
 		return BackgroundColor;
 	}
-	void SetTextColor(uint16_t color)
+	inline void SetTextColor(uint16_t color)
 	{
 		TextColor = color;
 	}
-	uint16_t GetTextColor(void)
+	inline uint16_t GetTextColor(void) const
 	{
 		return TextColor;
 	}
-	void SetFontSize(uint8_t size)
+	inline void SetFontSize(uint8_t size)
 	{
 		FontSize = size;
 	}
-	uint8_t GetFontSize(void)
+	inline uint8_t GetFontSize(void) const
 	{
 		return FontSize;
 	}
-	void SetRamPart(gui_RamPart * part)
-	{
-		ramPart = part;
-	}
-	gui_RamPart * GetRamPart(void)
+
+	inline gui_RamPart * GetRamPart(void)
 	{
 		return ramPart;
 	}
-	void SetCoordinates(gui_Coordinates * coor, uint8_t cunt = 1)
+	inline void SetCoordinates(gui_Coordinates * coor, uint8_t cunt = 1)
 	{
 		CoordinatesSys = coor;
 		CoordinatesCount = cunt;
 	}
-	gui_Coordinates * GetSecondaryCoordinates(void)
+	inline gui_Coordinates * GetSecondaryCoordinates(void)
 	{
 		return CoordinatesSys;
 	}
-	gui_Coordinates * GetSecondaryCoordinates(uint16_t * cunt)
+	inline gui_Coordinates * GetSecondaryCoordinates(uint16_t * cunt)
 	{
 		*cunt = CoordinatesCount;
 		return CoordinatesSys;
 	}
-	uint16_t GetPrimaryX(void)
+	inline uint16_t GetPrimaryX(void) const
 	{
 		return PrimaryCoor.GetX();
 	}
-	uint16_t GetPrimaryY(void)
+	inline uint16_t GetPrimaryY(void) const
 	{
 		return PrimaryCoor.GetY();
 	}
-	void SetPrimaryX(uint16_t data)
+	inline void SetPrimaryX(uint16_t data)
 	{
 		PrimaryCoor.SetX(data);
 	}
-	void SetPrimaryY(uint16_t dta)
+	inline void SetPrimaryY(uint16_t dta)
 	{
 		PrimaryCoor.SetY(dta);
 	}
-
-	bool IsShown()
+	///je zapnuty zobrazování lokální pro jedny souřadnice
+	inline bool IsShown() const
 	{
 		return PrimaryCoor.GetShown();
 	}
-	bool IsShownText()
+	///je  zapnuty globální zobrazování textu
+	inline bool IsShownText() const
 	{
 		return PrimaryCoor.GetShownText();
 	}
-	bool IsShowValue()
-	{
-		return PrimaryCoor.GetShownValue();
-	}
-	void SetShown(bool data)
+	///zapne lokální zobrazování pro primární souřadnice
+	inline void SetShown(bool data)
 	{
 		PrimaryCoor.SetShown(data);
 	}
-	void SetShownText(bool data)
+	///zapne globální zobrazování textu pro všechny souřadnice
+	inline void SetShownText(bool data)
 	{
 		PrimaryCoor.SetShownText(data);
 	}
-	void SetShownValue(bool data)
-	{
-		PrimaryCoor.SetShownValue(data);
-	}
-
-	void SetValue(int16_t value)
-	{
-		ramPart->Value = value;
-	}
-	int16_t GetValue(void)
-	{
-		return ramPart->Value;
-	}
-	void SetShownGlobal(bool data)
+	///zapne globální zobrazování widgetu pro všechny souřanice
+	inline void SetShownGlobal(bool data)
 	{
 		ramPart->bitField.b.IsShown = data;
 	}
-
-	void SetValueRounding(bool data)
-	{
-		ramPart->bitField.b.ValueRounding = data;
-	}
-
-	void SetUseDefaultBackgroundColor(bool data)
+	inline void SetUseDefaultBackgroundColor(bool data)
 	{
 		ramPart->bitField.b.DefaultBackgroundColor = data;
 	}
 
-	void SetUseDefaultTextColor(bool data)
+	inline void SetUseDefaultTextColor(bool data)
 	{
 		ramPart->bitField.b.DefaultTextColor = data;
 	}
-
-	void SetChoseable(bool data)
-	{
-		ramPart->bitField.b.IsChoseable = data;
-	}
-	void SetClicked(bool data)
-	{
-		ramPart->bitField.b.IsClicked = data;
-	}
-	bool IsShownGlobal()
+	///je zapnuty globální zobrazování
+	inline bool IsShownGlobal() const
 	{
 		return ramPart->bitField.b.IsShown;
 	}
-	bool GetValueRounding()
-	{
-		return ramPart->bitField.b.ValueRounding;
-	}
-	bool GetUseDefaultBackgroundColor()
+	inline bool GetUseDefaultBackgroundColor() const
 	{
 		return ramPart->bitField.b.DefaultBackgroundColor;
 	}
-	bool GetUseDefaultTextColor()
+	inline bool GetUseDefaultTextColor() const
 	{
 		return ramPart->bitField.b.DefaultTextColor;
 	}
-	bool GetChoseable()
-	{
-		return ramPart->bitField.b.IsChoseable;
-	}
-	bool GetClicked()
-	{
-		return ramPart->bitField.b.IsClicked;
-	}
+	///odvozená třída musí implementovat print
+	virtual void print() = 0;
+	virtual uint16_t GetSize() const = 0;
+
 protected:
-	char Text[16];
-
+	///pointer na text co už je ve flašce nebo jinde v ramce ale musi si to alokovat user
+	const char * Text;
+	///barva pozadí
 	uint16_t BackgroundColor;
+	///barva textu
 	uint16_t TextColor;
-	uint8_t FontSize; /*!< font size */
+	///velikost fontu
+	uint8_t FontSize;
 
-	/*
+	friend class gui_Screen;
+	/**
 	 * třída rampart se alokuje na heapě a nebude se mazat
-	 * z ramky a pak se v konstruktoru hodi pointer sem
+	 * zůstane dycky v ramce a nebude se zapisovat do flašky
 	 */
 	gui_RamPart * ramPart;
-
+	/// primární souřadnice - taky se uložijou do flašky
 	gui_Coordinates PrimaryCoor;
+	///sekundární se už neuložijou
 	gui_Coordinates * CoordinatesSys;
 	uint8_t CoordinatesCount; /*!< number of secondary coordinates, enable show secondary items*/
 };

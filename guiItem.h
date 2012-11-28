@@ -8,22 +8,15 @@
 #ifndef GUIITEM_H_
 #define GUIITEM_H_
 
-
-typedef void (*gui_ButtonCallbackTypedef)(void *);
-typedef gui_ButtonCallbackTypedef gui_ButtonCallbackArrayTypedef[BUTTON_COUNT];
-
-typedef void (*gui_ConverstionValueToText)(char *, int16_t);
-
 namespace GuiFramework
 {
 class gui_Screen;
-class gui_Item: public gui_LabelBase , public guiDoubleLinkedListClass<gui_Item>
+class gui_Item: public gui_LabelBase, public guiDoubleLinkedListClass<gui_Item>
 {
 public:
 	gui_Item();
-	gui_Item(gui_Screen * par, uint8_t idx);
 	~gui_Item();
-	void printItem(void);
+	void print(void);
 	void operator+=(uint16_t data);
 	void operator-=(uint16_t data);
 	void operator++(void);
@@ -32,61 +25,62 @@ public:
 	void PrevItem(void);
 	void Click(void);
 
-	void SetIndex(uint8_t data)
-	{
-		Index = data;
-	}
-	uint8_t GetIndex(void)
+	typedef void (*gui_ConverstionValueToText)(char *, int16_t);
+	typedef void (*gui_ButtonCallbackTypedef)(void *);
+	typedef gui_ButtonCallbackTypedef gui_ButtonCallbackArrayTypedef[BUTTON_COUNT];
+
+
+	inline uint8_t GetIndex(void) const
 	{
 		return Index;
 	}
-	void SetBackgroundColorActive(uint16_t data)
+	inline void SetBackgroundColorActive(uint16_t data)
 	{
 		BackgroundColorActive = data;
 	}
-	void SetBackgroundColorClicked(uint16_t data)
+	inline void SetBackgroundColorClicked(uint16_t data)
 	{
 		BackgroundColorClicked = data;
 	}
-	void SetTextColorActive(uint16_t data)
+	inline void SetTextColorActive(uint16_t data)
 	{
 		TextColorActive = data;
 	}
-	void SetTextColorClicked(uint16_t data)
+	inline void SetTextColorClicked(uint16_t data)
 	{
 		TextColorClicked = data;
 	}
-	void SetStep(uint8_t data)
+	inline void SetStep(uint8_t data)
 	{
 		Step = data;
 	}
-	void SetLowLimit(int16_t data)
+	inline void SetLowLimit(int16_t data)
 	{
 		LowLimit = data;
 	}
-	void SetHighLimit(int16_t data)
+	inline void SetHighLimit(int16_t data)
 	{
 		HighLimit = data;
 	}
-	void SetConvFunction(gui_ConverstionValueToText fce)
+	inline void SetConvFunction(gui_ConverstionValueToText fce)
 	{
 		ConversionFunction = fce;
 	}
 
-	uint8_t GetStep()
+	inline uint8_t GetStep() const
 	{
 		return Step;
 	}
-	int16_t GetLowLimit()
+	inline int16_t GetLowLimit() const
 	{
 		return LowLimit;
 	}
-	int16_t GetHighLimit()
+	inline int16_t GetHighLimit() const
 	{
 		return HighLimit;
 	}
 	bool GetActive();
-	uint16_t GetSize();
+	uint16_t GetSize() const;
 
 	enum Buttons
 	{
@@ -98,12 +92,79 @@ public:
 		CLICKED = 1, NOTCLICKED = 0
 	};
 
-	void Event(Buttons number, CallbackType type);
+
 	void SetCallback(Buttons number, CallbackType type,
 			gui_ButtonCallbackTypedef callback);
 
+	/**
+	 * @brief vrátí pointer na integer s value - mužou s tim pracovat moduly
+	 */
+	inline int16_t * GetValuePointer()
+	{
+		return &(ramPart->Value);
+	}
+	/**
+	 * @brief taky vrátí pointer akorát constantní
+	 */
+	inline const int16_t * GetValueConstPointer() const
+	{
+		return &(ramPart->Value);
+	}
+	///je zapnuty globální zobravání hodnoty
+	inline bool IsShowValue() const
+	{
+		return PrimaryCoor.GetShownValue();
+	}
+	///zapne globální zobrazování hodnoty pro všechny souřadnice
+	inline void SetShownValue(bool data)
+	{
+		PrimaryCoor.SetShownValue(data);
+	}
+	inline void SetValue(int16_t value)
+	{
+		ramPart->Value = value;
+	}
+	inline int16_t GetValue(void) const
+	{
+		return ramPart->Value;
+	}
+	inline void SetValueRounding(bool data)
+	{
+		ramPart->bitField.b.ValueRounding = data;
+	}
+	inline void SetChoseable(bool data)
+	{
+		ramPart->bitField.b.IsChoseable = data;
+	}
+	inline bool GetValueRounding() const
+	{
+		return ramPart->bitField.b.ValueRounding;
+	}
+	inline bool GetChoseable() const
+	{
+		return ramPart->bitField.b.IsChoseable;
+	}
+	inline bool GetClicked() const
+	{
+		return ramPart->bitField.b.IsClicked;
+	}
+	inline void SetClicked(bool data)
+	{
+		ramPart->bitField.b.IsClicked = data;
+	}
+
 private:
+
+	void Event(Buttons number, CallbackType type);
+
+	inline void SetIndex(uint8_t data)
+	{
+		Index = data;
+	}
+
 	uint8_t Index;
+
+	friend class gui_Screen;
 
 	//properties
 	uint16_t BackgroundColorActive; /*!< background color of active(chosen) item */
