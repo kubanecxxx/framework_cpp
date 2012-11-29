@@ -11,6 +11,11 @@
 namespace GuiFramework
 {
 
+/**
+ * @brief jenom pointery v listu
+ *
+ * nevim jak se dá udělat friend pro templaty tak je to v publicu
+ */
 template<class T> class guiDoubleLinkedListClasstemp
 {
 public:
@@ -28,7 +33,7 @@ public:
  * @brief double linked list
  *
  * má všechno co je potřeba pro linkovanej seznam,
- * widgety si to můžou zdědit se svym templatem a můžou veselet přeskakovat jeden na druhyho
+ * widgety si to můžou zdědit se svym templatem a můžou vesele přeskakovat jeden na druhyho
  * a registrovat se mezi sebou a tak
  */
 template<class T> class guiDoubleLinkedListClass
@@ -103,6 +108,7 @@ private:
 		return item;
 	}
 
+	///@brief virtual je dost duležity jinak se this dává dycky jenom velikost téhle třídy
 	virtual T * WriteToFlash(void);
 
 private:

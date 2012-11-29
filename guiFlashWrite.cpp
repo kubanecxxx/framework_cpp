@@ -19,9 +19,9 @@ const uint32_t gui_FlashWrite::sectors[12] =
 { SEC_0, SEC_1, SEC_2, SEC_3, SEC_4, SEC_5, SEC_6, SEC_7, SEC_8, SEC_9, SEC_10,
 		SEC_11 };
 
-void * gui_FlashWrite::Write(uint32_t Address, void * datas, uint32_t size)
+void * gui_FlashWrite::Write(uint32_t Address,const void * datas, uint32_t size)
 {
-	uint32_t * data = (uint32_t *) datas;
+	const uint32_t * data = (uint32_t *) datas;
 	uint32_t temp = Address;
 
 	while (size % 4 != 0)

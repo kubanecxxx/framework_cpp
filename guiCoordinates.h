@@ -18,11 +18,13 @@ namespace GuiFramework
 {
 class gui_LabelBase;
 class gui_Screen;
+/**
+ * @brief práce se souřadnicema, widgety to maji jako privátní proměnnou
+ */
 class gui_Coordinates
 {
 public:
 	gui_Coordinates();
-	~gui_Coordinates();
 	inline void SetX(uint16_t xcoor)
 	{
 		x = xcoor;
@@ -71,6 +73,10 @@ public:
 private:
 	uint16_t x;
 	uint16_t y;
+	/**
+	 * @brief parent je schválně v souřadnicich a ne widgetech, protože ty stejny widgety mužou byt
+	 * i na jinačich screenech
+	 */
 	gui_Screen * Parent;
 	friend class gui_LabelBase;
 
@@ -78,9 +84,9 @@ private:
 	{
 		struct
 		{
-			uint8_t IsShown :1;
-			uint8_t IsShownText :1;
-			uint8_t IsShownValue :1;
+			uint8_t IsShown :1;	///< zapnuty zobrazeni všeho, pro tyto souřadnice
+			uint8_t IsShownText :1; ///< zapnuty zobrazeni textu
+			uint8_t IsShownValue :1; ///< zapnuty zobrazeni hodnoty - jenom item, kdyby si s tim někdo hrál pro label tak se nic nestane
 		} b;
 		uint8_t w;
 	} bitField;

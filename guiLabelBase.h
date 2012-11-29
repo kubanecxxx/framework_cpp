@@ -12,6 +12,13 @@ namespace GuiFramework
 {
 class gui_Screen;
 
+/**
+ * @brief základní třída použitá pro label a item
+ *
+ * label v podstatě jenom implementuje print a getsize, kdyby šly virtuální metody, nemusela
+ * by vůbec být třída label a jenom item by ju dědil a dopsal si svoje věci
+ * @bug nemůžu použít virtuální ani pure virtuální metody, pak vymrzne zápis do flašky
+ */
 class gui_LabelBase
 {
 	/**
@@ -79,11 +86,11 @@ public:
 	}
 	inline uint16_t GetPrimaryX(void) const
 	{
-		return PrimaryCoor.GetX();
+		return PrimaryCoor.x;
 	}
 	inline uint16_t GetPrimaryY(void) const
 	{
-		return PrimaryCoor.GetY();
+		return PrimaryCoor.y;
 	}
 	inline void SetPrimaryX(uint16_t data)
 	{
@@ -140,9 +147,12 @@ public:
 	{
 		return ramPart->bitField.b.DefaultTextColor;
 	}
-	///odvozená třída musí implementovat print
+	//odvozená třída musí implementovat print
+
+#if 0
 	virtual void print() = 0;
 	virtual uint16_t GetSize() const = 0;
+#endif
 
 protected:
 	///pointer na text co už je ve flašce nebo jinde v ramce ale musi si to alokovat user

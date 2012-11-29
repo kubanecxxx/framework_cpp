@@ -14,12 +14,12 @@
 namespace GuiFramework
 {
 
+/**
+ * @brief label, jenom implementuje print a getsize
+ */
 class gui_Label : public gui_LabelBase, public guiDoubleLinkedListClass<gui_Label>
 {
 public:
-	/**
-	 * všechno set,get
-	 */
 	void print(void);
 	uint16_t GetSize() const;
 

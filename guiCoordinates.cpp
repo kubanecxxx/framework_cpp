@@ -20,9 +20,4 @@ gui_Coordinates::gui_Coordinates()
 	this->SetShownValue(true);
 }
 
-gui_Coordinates::~gui_Coordinates()
-{
-
-}
-
 }

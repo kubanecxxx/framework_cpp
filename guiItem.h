@@ -11,6 +11,10 @@
 namespace GuiFramework
 {
 class gui_Screen;
+
+/**
+ * @brief item, umí všechno co label + má nastavitelnou hodnotu a dá se vybirat a klikat
+ */
 class gui_Item: public gui_LabelBase, public guiDoubleLinkedListClass<gui_Item>
 {
 public:

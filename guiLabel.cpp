@@ -63,6 +63,9 @@ void gui_Label::print()
 	}
 }
 
+/**
+ * @brief vypočte kolik label žere celkem paměti
+ */
 uint16_t gui_Label::GetSize() const
 {
 	uint16_t temp;

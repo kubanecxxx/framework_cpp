@@ -11,12 +11,16 @@
 namespace GuiFramework
 {
 
+/**
+ * @brief statická třída pro práci s flaškou, tohle by měla byt spiš věc portingu
+ * @todo vymyslet aby to byla součást portingu nebo přes podminěné překlad pro jiny procesory
+ */
 class gui_FlashWrite
 {
 public:
 	static uint32_t GetSector(uint32_t Address);
 	static void Erase(uint32_t start, uint32_t stop);
-	static void * Write(void * datas, uint32_t size)
+	static void * Write(const void * datas, uint32_t size)
 	{
 		return Write(LastAddress, datas, size);
 	}
@@ -38,7 +42,7 @@ public:
 	} ADDR;
 
 private:
-	static void * Write(uint32_t start_address, void * data, uint32_t size);
+	static void * Write(uint32_t start_address,const void * data, uint32_t size);
 	static uint32_t LastAddress;
 	static uint32_t EndAddress;
 
