@@ -24,6 +24,13 @@ public:
 	T * p_prev;
 };
 
+/**
+ * @brief double linked list
+ *
+ * má všechno co je potřeba pro linkovanej seznam,
+ * widgety si to můžou zdědit se svym templatem a můžou veselet přeskakovat jeden na druhyho
+ * a registrovat se mezi sebou a tak
+ */
 template<class T> class guiDoubleLinkedListClass
 {
 public:

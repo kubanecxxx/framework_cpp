@@ -9,9 +9,14 @@
 namespace GuiFramework
 {
 
+///počet screenů
 uint8_t gui_Screen::Count = 0;
+///pointer na aktivní screen
 gui_Screen * gui_Screen::ActiveScreen = NULL;
 
+/**
+ * @brief defaultní setup - žádny widgety a tak
+ */
 gui_Screen::gui_Screen()
 {
 	ItemCount = 0;
@@ -29,6 +34,11 @@ gui_Screen::gui_Screen()
 	Count++;
 }
 
+/**
+ * @brief vytiskne aktivní screen
+ *
+ * projde všechny jeho widgety a vytiskne je
+ */
 void gui_Screen::printActiveScreen()
 {
 	low_level_FillRGB(ActiveScreen->BackgroundColor);
@@ -48,7 +58,10 @@ void gui_Screen::printActiveScreen()
 	}
 }
 
-uint16_t gui_Screen::GetSize()
+/**
+ * @brief vyblije kolik celé screen už zežral paměti
+ */
+uint16_t gui_Screen::GetSize() const
 {
 	uint16_t temp = sizeof(gui_Screen);
 	gui_Item * item = FirstItem;
@@ -68,6 +81,13 @@ uint16_t gui_Screen::GetSize()
 	return temp;
 }
 
+/**
+ * @brief funkce na skenování tlačítek, uživatel si ju musi periodicky sám volat
+ *
+ * funkce už si sama pošefi callbacky od itemu a tak
+ *
+ * @return pokud se zmačklo nějaky tlačitko vrátí true
+ */
 bool gui_Screen::ButtonScan()
 {
 	volatile gui_Item::Buttons input =

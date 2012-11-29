@@ -14,20 +14,30 @@
 
 namespace GuiFramework
 {
+/**
+ * @brief zastřešuje celé screen
+ *
+ * má v sobě pointery na widgety ve screenu
+ * samotny screeny už si musi pohlidat uživatel
+ * <br>
+ * uživatel si alokuje screen a někam si ho uloži a pak muže mezi něma přepinat a tisknout je
+ */
 class gui_Screen
 {
 public:
 	gui_Screen();
 	static void printActiveScreen(void);
+	///@brief nastavi screen jako aktivní a vytiskne ho
 	void printScreen(void)
 	{
 		SetActive();
 		printActiveScreen();
 	}
-	uint16_t GetSize();
+	uint16_t GetSize() const;
 	static bool ButtonScan();
 
-	inline gui_Item * Register(gui_Item * item, bool storeToFlash = false)
+	///@brief zaregistruje item do screenu a může ho rovnou narvat do flašky
+	gui_Item * Register(gui_Item * item, bool storeToFlash = false)
 	{
 		gui_Item * temp = item;
 		item->SetParentScreen(this);
@@ -38,7 +48,8 @@ public:
 		return temp->Register(temp, ItemCount, FirstItem);
 	}
 
-	inline gui_Label * Register(gui_Label * label, bool storeToFlash = false)
+	///@brief zaregistruje label do screenu a může ho rovnou narvat do flašky
+	gui_Label * Register(gui_Label * label, bool storeToFlash = false)
 	{
 		gui_Label * temp = label;
 		label->SetParentScreen(this);
@@ -48,7 +59,7 @@ public:
 		return temp->Register(temp, LabelCount, FirstLabel);
 	}
 
-	inline uint8_t GetItemIndex()
+	inline uint8_t GetItemIndex() const
 	{
 		return ItemIndex;
 	}
@@ -64,11 +75,11 @@ public:
 	{
 		TextColor = color;
 	}
-	inline uint16_t GetTextColor()
+	inline uint16_t GetTextColor() const
 	{
 		return TextColor;
 	}
-	inline uint16_t GetBackGroundColor()
+	inline uint16_t GetBackGroundColor() const
 	{
 		return BackgroundColor;
 	}
@@ -76,7 +87,7 @@ public:
 	{
 		ItemIndex = idx;
 	}
-	inline uint8_t GetItemCount(void)
+	inline uint8_t GetItemCount(void) const
 	{
 		return ItemCount;
 	}
@@ -84,7 +95,8 @@ public:
 	{
 		ActiveScreen = this;
 	}
-	inline bool IsActive()
+	///@brief jesli je tenhle screen aktivní
+	inline bool IsActive() const
 	{
 		return (ActiveScreen == this);
 	}
