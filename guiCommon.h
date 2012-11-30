@@ -23,6 +23,7 @@
 #include "guiLabel.h"
 #include "guiItem.h"
 #include "guiScreen.h"
+#include "PlotWidget.h"
 #include "gui_buttonCallbacks.h"
 
 #endif /* _GUI_COMMON_H_ */

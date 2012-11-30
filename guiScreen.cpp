@@ -41,7 +41,7 @@ gui_Screen::gui_Screen()
  */
 void gui_Screen::printActiveScreen()
 {
-	low_level_FillRGB(ActiveScreen->BackgroundColor);
+	port::FillRGB(ActiveScreen->BackgroundColor);
 
 	gui_Item * temp = ActiveScreen->FirstItem;
 	for (int i = 0; i < ActiveScreen->ItemCount; i++)
@@ -91,7 +91,7 @@ uint16_t gui_Screen::GetSize() const
 bool gui_Screen::ButtonScan()
 {
 	volatile gui_Item::Buttons input =
-			(gui_Item::Buttons) low_level_input_buttons();
+			(gui_Item::Buttons) port::input_buttons();
 
 	gui_Item * item;
 	item = ActiveScreen->GetActiveItem();

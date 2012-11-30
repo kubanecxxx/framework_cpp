@@ -101,10 +101,10 @@ void gui_Item::print()
 	}
 
 	//vyblit text
-	low_level_lcdPutsStringBackground(Text, PrimaryCoor.GetX(),
+	port::PutsStringBackground(Text, PrimaryCoor.GetX(),
 			PrimaryCoor.GetY(), tcolor, bcolor, FontSize);
 
-	low_level_lcdPutsStringBackground(buffer,
+	port::PutsStringBackground(buffer,
 			PrimaryCoor.GetX() + strlen(Text) * FontSize, PrimaryCoor.GetY(),
 			val_tcolor, val_bcolor, FontSize);
 	tcolor = t_temp;
@@ -140,10 +140,10 @@ void gui_Item::print()
 			}
 
 			//vyblit text
-			low_level_lcdPutsStringBackground(Text, CoordinatesSys[i].GetX(),
+			port::PutsStringBackground(Text, CoordinatesSys[i].GetX(),
 					CoordinatesSys[i].GetY(), tcolor, bcolor, FontSize);
 
-			low_level_lcdPutsStringBackground(buffer,
+			port::PutsStringBackground(buffer,
 					CoordinatesSys[i].GetX() + strlen(Text) * FontSize,
 					CoordinatesSys[i].GetY(), val_tcolor, val_bcolor, FontSize);
 			tcolor = t_temp;

@@ -70,7 +70,7 @@ public:
 	{
 		return bitField.b.IsShownValue;
 	}
-private:
+protected:
 	uint16_t x;
 	uint16_t y;
 	/**
@@ -87,8 +87,13 @@ private:
 			uint8_t IsShown :1;	///< zapnuty zobrazeni všeho, pro tyto souřadnice
 			uint8_t IsShownText :1; ///< zapnuty zobrazeni textu
 			uint8_t IsShownValue :1; ///< zapnuty zobrazeni hodnoty - jenom item, kdyby si s tim někdo hrál pro label tak se nic nestane
+			uint8_t PlotAutoScaleY :1;
+			uint8_t PlotAutoScaleX :1;
+			uint8_t PlotTitleX :1;
+			uint8_t PlotTitleY :1;
+			uint8_t PlotOnlyPoints :1;
 		} b;
-		uint8_t w;
+		uint16_t w;
 	} bitField;
 };
 }

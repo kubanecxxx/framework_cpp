@@ -1,0 +1,81 @@
+/**
+ * @file gui_port.c
+ *
+ * @date 26.5.2012
+ *      @author Kubanec
+ *      @brief low level porting for gui framework
+ */
+
+#include "ch.h"
+#include "hal.h"
+#include "framework_port.h"
+#include "st7735.hpp"
+
+namespace GuiFramework
+{
+/**
+ * @addtogroup GUI
+ * @{
+ */
+
+/**
+ * @addtogroup GUI_PORT
+ * @{
+ */
+
+/**
+ * @addtogroup STM32F407_PORT
+ * @{
+ */
+
+/**
+ * @brief low level function for scanning buttons
+ * @return bit state of buttons
+ */
+uint32_t port::input_buttons(void)
+{
+	if (palReadPad(GPIOB,2))
+		return 2;
+	else if (palReadPad(GPIOD,0))
+		return 0;
+	else if (palReadPad(GPIOD,4))
+		return 1;
+	else
+		return -1;
+}
+
+void port::button_init()
+{
+	St7735::Init();
+	palSetPadMode(GPIOA, 0, PAL_MODE_INPUT_PULLDOWN);
+	palSetPadMode(GPIOD, 0, PAL_MODE_INPUT_PULLDOWN);
+	palSetPadMode(GPIOD, 4, PAL_MODE_INPUT_PULLDOWN);
+	palSetPadMode(GPIOD, 2, PAL_MODE_OUTPUT_PUSHPULL);
+	palSetPad(GPIOD, 2);
+
+	palSetPadMode(GPIOB, 2, PAL_MODE_INPUT_PULLDOWN);
+	palSetPadMode(GPIOB, 0, PAL_MODE_OUTPUT_PUSHPULL);
+	palSetPad(GPIOB, 0);
+}
+
+
+
+///musí to tady být pokud se nepoužíva c++ linker
+extern "C" void __cxa_pure_virtual()
+{
+	while (1)
+		;
+}
+
+}
+/**
+ * @}
+ */
+
+/**
+ * @}
+ */
+
+/**
+ * @}
+ */

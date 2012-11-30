@@ -38,7 +38,7 @@ void gui_Label::print()
 	else
 	{
 		//vyblit text
-		low_level_lcdPutsStringBackground(Text, PrimaryCoor.GetX(),
+		port::PutsStringBackground(Text, PrimaryCoor.GetX(),
 				PrimaryCoor.GetY(), tcolor, bcolor, FontSize);
 	}
 	//}
@@ -55,7 +55,7 @@ void gui_Label::print()
 			else
 			{
 				//vyblit text
-				low_level_lcdPutsStringBackground(Text,
+				port::PutsStringBackground(Text,
 						CoordinatesSys[i].GetX(), CoordinatesSys[i].GetY(),
 						tcolor, bcolor, FontSize);
 			}
