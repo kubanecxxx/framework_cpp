@@ -11,16 +11,30 @@
 namespace GuiFramework
 {
 
+/**
+ * @brief jednoduché graf
+ *
+ * má podoporu modulo práce s datama, takže user nemusí ručne přešouvat data
+ * jenom pošle pointer a délku a kolikátej prvek má byt jako prvni a graf si poradi
+ *
+ * @todo dodělat podporu pro označení os a tak
+ */
 class PlotWidget: public GuiFramework::gui_Coordinates
 {
 public:
 	PlotWidget();
 
 	void print();
-	inline void SetData(const int16_t * data, uint8_t length)
+	/**
+	 * @brief nastavení vstupních dat
+	 *
+	 * @note pokud je index 0 modulo adresování je vypnuto
+	 */
+	inline void SetData(const int16_t * data, uint8_t length, uint8_t index = 0)
 	{
 		plotData = data;
 		dataLength = length;
+		firstIndex = index;
 	}
 	inline void SetXAutoscale(bool dat)
 	{
@@ -63,6 +77,7 @@ public:
 
 private:
 	const int16_t * plotData;
+	uint8_t firstIndex;
 	uint8_t dataLength;
 	uint16_t xSize;
 	uint16_t ySize;

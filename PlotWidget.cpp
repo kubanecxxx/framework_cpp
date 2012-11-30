@@ -8,7 +8,7 @@
 #include "guiCommon.h"
 
 const int16_t mata[] =
-{ 1, 5, 6, -6, -10, 10, 12, -10 };
+{ 4, 1, 2, 3 };
 
 namespace GuiFramework
 {
@@ -16,32 +16,39 @@ namespace GuiFramework
 PlotWidget::PlotWidget()
 {
 	dataColor = 0xffff;
-	backgroundColor = 0x8000;
+	backgroundColor = 0x0;
 	axeColor = 0x07E0;
 
-	xSize = 50;
+	xSize = 100;
 	ySize = 50;
 	plotData = NULL;
 	dataLength = 0;
 
 	bitField.b.PlotAutoScaleX = true;
-	bitField.b.PlotAutoScaleY = true;
-	bitField.b.PlotOnlyPoints = true;
+	bitField.b.PlotAutoScaleY = false;
+	bitField.b.PlotOnlyPoints = false;
 	bitField.b.PlotTitleX = false;
 	bitField.b.PlotTitleY = false;
 
-	SetData(mata, sizeof(mata));
-	SetYLimits(-10, 15);
-	SetXStep(5);
+	SetData(mata, 4, 1);
+	SetYLimits(0, 5);
+	SetXStep(15);
 }
 
+/**
+ * @brief vytiskne graf podle jeho nastaveni pokud je aktivni jeho parent screen
+ */
 void PlotWidget::print()
 {
-	//eště vyplnit pozadí
+	if (!Parent->IsActive())
+		return;
 
+	port::drawRectangle(x, y, x + xSize + 1, y + ySize + 1, backgroundColor);
 	ComputeYLimits();
 	ComputeXStep();
 	printAxes();
+	if (plotData == NULL || dataLength == 0 || firstIndex >= dataLength)
+		return;
 	printData();
 }
 
@@ -67,7 +74,7 @@ void PlotWidget::printAxes() const
 
 		shift = (((ymax) << 4) / (ymax - ymin) * ySize) >> 4;
 		avg = y + shift;
-		port::drawLine(x - 5, avg, x + xSize, avg, axeColor);
+		port::drawLine(x, avg, x + xSize, avg, axeColor);
 	}
 }
 
@@ -79,6 +86,8 @@ void PlotWidget::printData() const
 	 *
 	 * v y zpruměrovat podle size a rozsahu maxima a minima
 	 * nebo měřitko natvrdo
+	 *
+	 * @todo promyslet podporu kruhovyho bufferu
 	 */
 
 	int16_t avg;
@@ -89,10 +98,27 @@ void PlotWidget::printData() const
 
 	for (int i = 0; i < dataLength; i++)
 	{
-		uint16_t yp = avg - ((plotData[i] * yDivider) >> 4);
+		//modulo adresování
+		int j = i + firstIndex;
+		if (j >= dataLength)
+			j -= dataLength;
+
+		uint16_t yp = avg - ((plotData[j] * yDivider) >> 4);
+		uint16_t ex = x + i * stepX;
 		//pokud je hodnota mimo rozsah tak se nevykresli
-		if (yp >= y && yp <= y+ySize)
-			port::putPixel(x + i * stepX, yp, dataColor);
+		if (yp >= y && yp <= y + ySize && ex <= x + xSize)
+		{
+			uint16_t y_prev;
+			uint16_t x_prev;
+
+			if (!bitField.b.PlotOnlyPoints && i > 0)
+			{
+				port::drawLine(x_prev, y_prev, ex, yp, dataColor);
+			}
+			port::putPixel(ex, yp, dataColor);
+			y_prev = yp;
+			x_prev = ex;
+		}
 	}
 }
 
@@ -102,15 +128,16 @@ void PlotWidget::ComputeYLimits()
 	if (bitField.b.PlotAutoScaleY)
 	{
 		//najit maxima a minima a z velikosti y vpixelech vypočitat limity
+		///@todo dodělat výpočet automatickyho měřitka v ose Y
 	}
 
-	yDivider =  (ySize << 4) / (ymax - ymin);
+	yDivider = (ySize << 4) / (ymax - ymin);
 }
 
+///pokud je vypnuty automaticky měřitko v X nic neudělá
+///jinak vypočte přimo krok z počtu hodnot a velikosti grafu
 void PlotWidget::ComputeXStep()
 {
-	//pokud je vypnuty automaticky měřitko v X nic neudělá
-	//jinak vypočte přimo krok z počtu hodnot a velikosti grafu
 	if (bitField.b.PlotAutoScaleX)
 	{
 		stepX = xSize / dataLength;
