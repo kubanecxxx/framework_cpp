@@ -7,7 +7,7 @@
 
 #include "inttypes.h"
 #include "guiFlashWrite.h"
-#include "stm32f4xx_flash.h"
+//#include "stm32f4xx_flash.h"
 
 namespace GuiFramework
 {
@@ -19,8 +19,11 @@ const uint32_t gui_FlashWrite::sectors[12] =
 { SEC_0, SEC_1, SEC_2, SEC_3, SEC_4, SEC_5, SEC_6, SEC_7, SEC_8, SEC_9, SEC_10,
 		SEC_11 };
 
+//@todo předělat do portingu
+
 void * gui_FlashWrite::Write(uint32_t Address,const void * datas, uint32_t size)
 {
+#if 0
 	const uint32_t * data = (uint32_t *) datas;
 	uint32_t temp = Address;
 
@@ -49,10 +52,12 @@ void * gui_FlashWrite::Write(uint32_t Address,const void * datas, uint32_t size)
 	FLASH_Lock();
 
 	return (void *) temp;
+#endif
 }
 
 void gui_FlashWrite::Erase(uint32_t start, uint32_t stop)
 {
+#if 0
 	FLASH_Unlock();
 	FLASH_ClearFlag(
 			FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR
@@ -80,6 +85,7 @@ void gui_FlashWrite::Erase(uint32_t start, uint32_t stop)
 	LastAddress = start;
 	EndAddress = stop;
 	FLASH_Lock();
+#endif
 }
 
 uint32_t gui_FlashWrite::GetSector(uint32_t Address)
