@@ -119,7 +119,7 @@ private:
 template<class T>
 T * guiDoubleLinkedListClass<T>::WriteToFlash(void)
 {
-	return (T *) gui_FlashWrite::Write(this, sizeof(T));
+	return (T *) port::Write(this, sizeof(T));
 }
 
 } /* namespace GuiFramework */

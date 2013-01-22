@@ -10,6 +10,7 @@
 #include "hal.h"
 #include "framework_port.h"
 #include "st7735.hpp"
+#include "stm32f10x_flash.h"
 
 namespace GuiFramework
 {
@@ -34,37 +35,63 @@ namespace GuiFramework
  */
 uint32_t port::input_buttons(void)
 {
-	if (palReadPad(GPIOB,2))
+	if (palReadPad(GPIOB,4))
 		return 2;
-	else if (palReadPad(GPIOD,0))
+	else if (palReadPad(GPIOB,3))
 		return 0;
-	else if (palReadPad(GPIOD,4))
+	else if (palReadPad(GPIOB,5))
 		return 1;
 	else
 		return -1;
 }
 
-void port::button_init()
+void port::init()
 {
 	St7735::Init();
-	palSetPadMode(GPIOA, 0, PAL_MODE_INPUT_PULLDOWN);
-	palSetPadMode(GPIOD, 0, PAL_MODE_INPUT_PULLDOWN);
-	palSetPadMode(GPIOD, 4, PAL_MODE_INPUT_PULLDOWN);
-	palSetPadMode(GPIOD, 2, PAL_MODE_OUTPUT_PUSHPULL);
-	palSetPad(GPIOD, 2);
-
-	palSetPadMode(GPIOB, 2, PAL_MODE_INPUT_PULLDOWN);
-	palSetPadMode(GPIOB, 0, PAL_MODE_OUTPUT_PUSHPULL);
-	palSetPad(GPIOB, 0);
+	AFIO->MAPR |= 0b010 << 24;
+	palSetPadMode(GPIOB, 3, PAL_MODE_INPUT_PULLDOWN);
+	palSetPadMode(GPIOB, 4, PAL_MODE_INPUT_PULLDOWN);
+	palSetPadMode(GPIOB, 5, PAL_MODE_INPUT_PULLDOWN);
 }
 
+uint32_t port::address = 0;
 
-
-///musí to tady být pokud se nepoužíva c++ linker
-extern "C" void __cxa_pure_virtual()
+void port::Erase(uint32_t start, uint32_t stop)
 {
-	while (1)
-		;
+	address = start;
+	FLASH_Unlock();
+	while(start < stop)
+	{
+		if (FLASH_ErasePage(start) != FLASH_COMPLETE)
+		{
+			asm("bkpt");
+		}
+		start += 1024;
+	}
+
+	FLASH_Lock();
+}
+
+void * port::Write(const void * datas, uint32_t size)
+{
+	FLASH_Unlock();
+	uint16_t * data = (uint16_t *)datas;
+	void * temp = (void *)address;
+
+	size = (size + 1) / 2;
+
+	for (uint32_t i = 0 ; i < size ; i++)
+	{
+		if (FLASH_ProgramHalfWord(address,*data) != FLASH_COMPLETE)
+		{
+			asm("bkpt");
+		}
+		data++;
+		address += 2;
+	}
+
+	return temp;
+	FLASH_Lock();
 }
 
 }

@@ -14,9 +14,8 @@
 
 #include <string.h>
 #include "inttypes.h"
-#include "guiFlashWrite.h"
-#include "guiDoubleLinkedListClass.h"
 #include "framework_port.h"
+#include "guiDoubleLinkedListClass.h"
 #include "guiCoordinates.h"
 #include "guiRamPart.h"
 #include "guiLabelBase.h"
