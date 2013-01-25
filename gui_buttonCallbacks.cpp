@@ -31,13 +31,21 @@ void gui_EventClickedDown(void * data)
 {
 	gui_Item * item = (gui_Item *) data;
 
+#ifdef ITEM_VALUE_INVERSE
+	++(*item);
+#else
 	--(*item);
+#endif
 }
 void gui_EventClickedUp(void * data)
 {
 	gui_Item * item = (gui_Item *) data;
 
+#ifdef ITEM_VALUE_INVERSE
+	--(*item);
+#else
 	++(*item);
+#endif
 }
 void gui_EventClickedEnter(void * data)
 {
