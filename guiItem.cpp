@@ -14,8 +14,8 @@ void gui_default_conversion(char* data, int16_t value);
 
 gui_Item::gui_Item()
 {
-	BackgroundColorActive = 0xf;
-	BackgroundColorClicked = 0x8000;
+	BackgroundColorActive = 0x8000;
+	BackgroundColorClicked = 0x0f;
 	TextColorActive = 0xffff;
 	TextColorClicked = 0xffff;
 
